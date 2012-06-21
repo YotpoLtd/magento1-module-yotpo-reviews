@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <tabs>
+        <yotpo>
+            <label>Yotpo</label>
+            <sort_order>400</sort_order>
+        </yotpo>
+    </tabs>
+    
+    <sections>
+        <yotpo module="yotpo">
+            <label>Yotpo Social Reviews Software</label>
+            <tab>yotpo</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>110</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+        		<!-- New groups go here -->
+		    	<yotpo_general_group translate="label">
+        			<label>Yotpo Widget Configurations</label>
+	        		<frontend_type>text</frontend_type>
+          			<sort_order>1</sort_order>
+          			<show_in_default>1</show_in_default>
+          			<show_in_website>1</show_in_website>
+          			<show_in_store>1</show_in_store>
+          			<comment>
+          				<![CDATA[
+          				<p>Click
+          					<a href="https://b2b.yotpo.com/install/magento" target="_blank" title="yotpo">here</a>
+          					for a step by step installation guide. 
+						</p>
+          				<p>If you need help the Yotpo support team is here 24/7, don't hesitate to 
+          					<a href="https://b2b.yotpo.com/contact" target="_blank" title="yotpo-support">contact us</a>
+						</p><br/>
+          				]]>
+          			</comment>
+
+          			
+          			<fields>
+                        <yotpo_appkey>
+                            <label>Account Appkey</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>1</sort_order>
+                            <comment>Get your appkey at your yotpo account setting page. Click
+                            	<![CDATA[<a href="https://b2b.yotpo.com/register" target="_blank" title="yotpo-sign-up">here</a>]]>
+                            	to sign in to yotpo
+                            </comment>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </yotpo_appkey>  
+                        <yotpo_secret>
+                        	<label>Secret</label>
+                        	<frontend_type>text</frontend_type>
+                        	<sort_order>2</sort_order>
+                        	<comment>Get your secret at your yotpo account setting page. Click
+                            	<![CDATA[<a href="https://b2b.yotpo.com/register" target="_blank" title="yotpo-sign-up">here</a>]]>
+                            	to sign in to yotpo
+                        	</comment>
+                        	<show_in_default>1</show_in_default>
+                        	<show_in_website>1</show_in_website>
+                        	<show_in_store>1</show_in_store>
+                        </yotpo_secret>
+                    </fields>
+        		</yotpo_general_group>
+				<yotpo_mail_after_purchase_group translate="label">
+	        		<label>Yotpo Mail After Purchase Feature</label>
+		        	<frontend_type>text</frontend_type>
+	          		<sort_order>2</sort_order>
+	          		<show_in_default>1</show_in_default>
+	          		<show_in_website>1</show_in_website>
+	          		<show_in_store>1</show_in_store>
+	          		<comment>
+	          			<![CDATA[
+	          				<p>Mail After Purchase (also known as Auto-reminder Review Email)</p>
+							<p>This feature allows you to re-connect with your customers and ask them to review the product they recently purchased.</p>
+							<p>To learn more about the benefits of this feature and how to enable it, click 
+	          					<a href="https://b2b.yotpo.com/settings" target="_blank" title="yotpo">here</a> 
+							</p><br/>
+						]]>
+	          		</comment>
+					<fields>
+						<disable_feature>
+							<label>Disable feature</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>3</sort_order>
+							<comment>
+							</comment>
+							<show_in_default>1</show_in_default>
+	                        <show_in_website>1</show_in_website>
+	                        <show_in_store>1</show_in_store>
+						</disable_feature>
+	                 </fields>
+	        	</yotpo_mail_after_purchase_group>
+      		</groups>
+        </yotpo>
+    </sections>
+</config>

@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+
+<config>
+    <modules>
+        <Yotpo_Yotpo>
+            <version>0.0.1</version>
+        </Yotpo_Yotpo>
+    </modules>
+    
+    <global>
+    	<blocks>
+    		<yotpo>
+	    		<class>Yotpo_Yotpo_Block</class>
+    		</yotpo>
+    	</blocks>
+    	<models>
+    		<yotpoyotpo>
+    			<class>Yotpo_Yotpo_Model</class>
+    		</yotpoyotpo>
+    	</models>
+    	<events>
+			<sales_order_place_after>
+			  <observers>
+			  	  <yotpo_yotpo_mail_observer>
+			  	  	  <type>singleton</type>
+			          <class>Yotpo_Yotpo_Model_Mail_Observer</class>
+			          <method>mail_after_purchase</method>
+			      </yotpo_yotpo_mail_observer>
+			  </observers>
+			</sales_order_place_after>
+      	</events>
+    	
+    	<helpers>
+    		<yotpo>
+    			<class>Yotpo_Yotpo_Helper</class>
+    		</yotpo>
+    	</helpers>
+    </global>
+    
+	<frontend>
+		<layout>
+			<updates>
+				<yotpo>
+					<file>yotpo.xml</file>
+				</yotpo>
+			</updates>
+		</layout>
+	</frontend>
+	
+	<adminhtml>
+        <acl>
+            <resources>
+                <admin>
+                    <children>
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <yotpo>
+                                            <title>Yotpo Module Section</title>
+                                        </yotpo>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+    </adminhtml>
+</config>
