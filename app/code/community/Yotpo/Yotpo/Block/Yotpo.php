@@ -35,8 +35,7 @@ class Yotpo_Yotpo_Block_Yotpo extends Mage_Core_Block_Template
     public function getAppKey() 
     {
   
-    	#return $this->getData("appKey");
-   	 	return Mage::getStoreConfig('yotpo/yotpo_group/yotpo_appkey',Mage::app()->getStore());
+   	 	return Mage::getStoreConfig('yotpo/yotpo_general_group/yotpo_appkey',Mage::app()->getStore());
     }
     
         public function getProductName()

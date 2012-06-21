@@ -40,7 +40,7 @@
           			
           			<fields>
                         <yotpo_appkey>
-                            <label>Account Appkey</label>
+                            <label>Api Appkey</label>
                             <frontend_type>text</frontend_type>
                             <sort_order>1</sort_order>
                             <comment>Get your appkey at your yotpo account setting page. Click
