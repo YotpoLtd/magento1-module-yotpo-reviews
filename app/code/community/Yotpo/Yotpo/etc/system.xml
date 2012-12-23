@@ -27,13 +27,14 @@
           			<show_in_store>1</show_in_store>
           			<comment>
           				<![CDATA[
-          				<p>Click
-          					<a href="https://b2b.yotpo.com/install/magento" target="_blank" title="yotpo">here</a>
-          					for a step by step installation guide. 
-						</p>
+          			
           				<p>If you need help the Yotpo support team is here 24/7, don't hesitate to 
-          					<a href="https://b2b.yotpo.com/contact" target="_blank" title="yotpo-support">contact us</a>
-						</p><br/>
+          					<a href="https://www.yotpo.com/contact" target="_blank" title="yotpo-support">contact us</a>
+						      </p>
+
+                    <p>Click <a href="http://support.yotpo.com/entries/22635391-advanced-magento-features" target="_blank" 
+                      title="yotpo">here</a> for advanced customizations guide. 
+                    </p><br/>
           				]]>
           			</comment>
 
@@ -63,6 +64,19 @@
                         	<show_in_website>1</show_in_website>
                         	<show_in_store>1</show_in_store>
                         </yotpo_secret>
+                        <disable_default_widget_position>
+                            <label>Disable Default Widget Position</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>4</sort_order>
+                            <comment>
+                              By choosing not to use the deafult position, you'll need to follow the instructions in the 
+                              <![CDATA[<br/><a href="http://support.yotpo.com/entries/22635391-advanced-magento-features" target="_blank" title="advanced-cusomization-guide">advanced customizations guide</a>]]>
+                            </comment>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </disable_default_widget_position>
                     </fields>
         		</yotpo_general_group>
 				<yotpo_mail_after_purchase_group translate="label">
@@ -86,7 +100,7 @@
 							<label>Disable feature</label>
 							<frontend_type>select</frontend_type>
 							<source_model>adminhtml/system_config_source_yesno</source_model>
-							<sort_order>3</sort_order>
+							<sort_order>4</sort_order>
 							<comment>
 							</comment>
 							<show_in_default>1</show_in_default>

@@ -3,7 +3,7 @@
 class Yotpo_Yotpo_Model_Mail_Observer
 {
 	
-	const YOTPO_OAUTH_TOKEN_URL = "https://oauth.yotpo.com/oauth/token";
+	const YOTPO_OAUTH_TOKEN_URL = "https://api.yotpo.com/oauth/token";
 	const YOTPO_API_URL = "https://api.yotpo.com/apps";
 	
 	public function __construct()
@@ -28,9 +28,6 @@ class Yotpo_Yotpo_Model_Mail_Observer
 		$app_key = Mage::getStoreConfig('yotpo/yotpo_general_group/yotpo_appkey',Mage::app()->getStore());
 		$secret = Mage::getStoreConfig('yotpo/yotpo_general_group/yotpo_secret', Mage::app()->getStore());
 		$disable_feature = Mage::getStoreConfig('yotpo/yotpo_mail_after_purchase_group/disable_feature', Mage::app()->getStore());
-		
-			Mage::log('app_key: '.$app_key);
-			Mage::log('secret: '.$secret);
 		
 		//check if both app_key and secret exist
 		if(($app_key == null) or ($secret == null))
@@ -62,8 +59,11 @@ class Yotpo_Yotpo_Model_Mail_Observer
 			
 			$product_data = array();
 			$product_data['name'] = $product->getName();
-			$product_data['url'] = Mage::getModel('catalog/product')->load($product->getProductId())->getProductUrl();	
-		
+			$full_product = Mage::getModel('catalog/product')->load($product->getProductId());
+			$product_data['url'] = $full_product->getProductUrl();	
+			$product_data['image'] = $full_product->getImageUrl();
+			$product_data['description'] = Mage::helper('core')->htmlEscape(strip_tags($full_product->getDescription()));
+
 			$products_arr[$product->getProductId()] = $product_data;
 			
 		}
