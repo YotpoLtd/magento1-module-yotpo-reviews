@@ -18,6 +18,11 @@
     			<class>Yotpo_Yotpo_Model</class>
     		</yotpoyotpo>
     	</models>
+        <helpers>
+            <yotpo>
+                <class>Yotpo_Yotpo_Helper</class>
+            </yotpo>
+        </helpers>
     	<events>
 			<sales_order_place_after>
 			  <observers>
@@ -29,14 +34,20 @@
 			  </observers>
 			</sales_order_place_after>
       	</events>
-    	
-    	<helpers>
-    		<yotpo>
-    			<class>Yotpo_Yotpo_Helper</class>
-    		</yotpo>
-    	</helpers>
     </global>
     
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <Yotpo_Yotpo before="Mage_Adminhtml">Yotpo_Yotpo</Yotpo_Yotpo>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>    
+    </admin>
+
 	<frontend>
 		<layout>
 			<updates>
@@ -48,6 +59,17 @@
 	</frontend>
 	
 	<adminhtml>
+        <events>
+            <core_block_abstract_prepare_layout_before>
+                <observers>
+                    <yotpo_block_abstract_prepare_layout_before>
+                        <class>Yotpo_Yotpo_model_export_observer</class>
+                        <method>addMassAction</method>
+                    </yotpo_block_abstract_prepare_layout_before>
+                </observers>
+            </core_block_abstract_prepare_layout_before>
+        </events>
+
         <acl>
             <resources>
                 <admin>
