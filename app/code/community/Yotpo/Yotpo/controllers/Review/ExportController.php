@@ -3,8 +3,7 @@
 class Yotpo_Yotpo_Review_ExportController extends Mage_Adminhtml_Controller_Action
 {
     /**
-     * Exports reviews defined by id in post param "review_ids" to csv and offers file directly for download
-     * when finished.
+     * Exports reviews by id in post param "reviews" to csv and download file when finished.
      */
     public function csvexportAction()
     {

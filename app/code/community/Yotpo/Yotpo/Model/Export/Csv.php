@@ -7,9 +7,6 @@ class Yotpo_Yotpo_Model_Export_Csv extends Mage_Core_Model_Abstract
 
     /**
      * export given reviews to csv file in var/export.
-     *
-     * @param $reviews List of reviews to export.
-     * @return String The name of the written csv file in var/export
      */
     public function exportReviews($reviewsToExport)
     {
@@ -50,8 +47,6 @@ class Yotpo_Yotpo_Model_Export_Csv extends Mage_Core_Model_Abstract
 
     /**
 	 * Writes the head row with the column names in the csv file.
-	 *
-	 * @param $fp The file handle of the csv file
 	 */
     protected function writeHeadRow($fp)
     {
@@ -61,9 +56,6 @@ class Yotpo_Yotpo_Model_Export_Csv extends Mage_Core_Model_Abstract
     /**
 	 * Writes the row(s) for the given review in the csv file.
 	 * A row is added to the csv file for each reviewed item.
-	 *
-	 * @param Mage_Sales_Model_Review $review The review to write csv of
-	 * @param $fp The file handle of the csv file
 	 */
     protected function writeReview($review, $fp)
     {
@@ -75,17 +67,17 @@ class Yotpo_Yotpo_Model_Export_Csv extends Mage_Core_Model_Abstract
     protected function getHeadRowValues()
     {
         return array(
-            'Review Title',
-            'Review Detail',
-            'Nickname',
-            'Review Status',         #STATUS_APPROVED = 1;STATUS_PENDING = 2;STATUS_NOT_APPROVED = 3;
-            'Rating',
-            'Product Sku',
-            'Product Name',
-            'Product Description',
-            'Product Url',
-            'Product Image Url'
-    	);
+            'review_title',
+            'review_content',
+            'display_name',
+            'review_status',         #STATUS_APPROVED = 1;STATUS_PENDING = 2;STATUS_NOT_APPROVED = 3;
+            'review_score',
+            'sku',
+            'product_title',
+            'product_description',
+            'product_url',
+            'product_image_url'
+        );
     }
 
     protected function getProductItemValues($product_id)
@@ -101,7 +93,7 @@ class Yotpo_Yotpo_Model_Export_Csv extends Mage_Core_Model_Abstract
         catch (Exception $e){}
 
         return array(
-            $product->getSku(),
+            $product_id,
             $product->getName(),
             $product->getDescription(),
             $product->getProductUrl(),
