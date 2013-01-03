@@ -76,7 +76,8 @@ class Yotpo_Yotpo_Model_Export_Csv extends Mage_Core_Model_Abstract
             'product_title',
             'product_description',
             'product_url',
-            'product_image_url'
+            'product_image_url',
+            'appkey'
         );
     }
 
@@ -97,7 +98,8 @@ class Yotpo_Yotpo_Model_Export_Csv extends Mage_Core_Model_Abstract
             $product->getName(),
             $product->getDescription(),
             $product->getProductUrl(),
-            $Image
+            $Image,
+            Mage::getModel('Yotpo_Yotpo_Block_Yotpo')->getAppKey()
         );
     }
 
