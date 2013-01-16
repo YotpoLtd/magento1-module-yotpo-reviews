@@ -50,6 +50,7 @@ class Yotpo_Yotpo_Model_Mail_Observer
 		$data["customer_name"] = $order->getCustomerName();
 		$data["order_id"] = $order->getIncrementId();
 		$data['platform'] = 'magento';
+		$data['currency_iso'] = $order->getOrderCurrency()->getCode();
 		
 		$products = $order->getAllItems();
 		
@@ -63,7 +64,8 @@ class Yotpo_Yotpo_Model_Mail_Observer
 			$product_data['url'] = $full_product->getProductUrl();	
 			$product_data['image'] = $full_product->getImageUrl();
 			$product_data['description'] = Mage::helper('core')->htmlEscape(strip_tags($full_product->getDescription()));
-
+			$product_data['price'] = $product->getPrice();
+			
 			$products_arr[$product->getProductId()] = $product_data;
 			
 		}
