@@ -63,7 +63,7 @@
             <core_block_abstract_prepare_layout_before>
                 <observers>
                     <yotpo_block_abstract_prepare_layout_before>
-                        <class>Yotpo_Yotpo_model_export_observer</class>
+                        <class>Yotpo_Yotpo_Model_Export_Observer</class>
                         <method>addMassAction</method>
                     </yotpo_block_abstract_prepare_layout_before>
                 </observers>
