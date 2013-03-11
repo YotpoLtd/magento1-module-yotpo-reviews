@@ -1,0 +1,26 @@
+<?php
+
+?>
+
+<script type="text/javascript">
+    //<![CDATA[
+    function exportOrders() {
+        new Ajax.Request('<?php echo $this->getAjaxExportUrl() ?>', {
+            method:     'get',
+            onComplete: function(transport){
+
+                if (transport.responseText == 1 || [408, 504, 598, 599].indexOf(transport.status) > -1){
+                    var html = '<ul class="messages"><li class="success-msg"><ul><li>' + 'Past orders were exported successfully. Emails will be sent to your customers within 24 hours, and you will start to receive reviews.' + '</li></ul></li></ul>';
+                        $('messages').update(html);
+                } 
+                else {
+                    var html = '<ul class="messages"><li class="error-msg"><ul><li>' + transport.responseText + '</li></ul></li></ul>';
+                        $('messages').update(html);    
+                }
+            }
+        });
+    }
+    //]]>
+</script>
+
+<?php echo $this->getButtonHtml(); ?>

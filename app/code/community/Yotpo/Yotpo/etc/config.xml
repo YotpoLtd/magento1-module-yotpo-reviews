@@ -24,7 +24,7 @@
             </yotpo>
         </helpers>
     	<events>
-			<sales_order_place_after>
+			<sales_order_save_after>
 			  <observers>
 			  	  <yotpo_yotpo_mail_observer>
 			  	  	  <type>singleton</type>
@@ -32,7 +32,7 @@
 			          <method>mail_after_purchase</method>
 			      </yotpo_yotpo_mail_observer>
 			  </observers>
-			</sales_order_place_after>
+			</sales_order_save_after>
       	</events>
     </global>
     

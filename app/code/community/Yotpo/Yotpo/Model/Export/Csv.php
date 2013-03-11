@@ -72,6 +72,7 @@ class Yotpo_Yotpo_Model_Export_Csv extends Mage_Core_Model_Abstract
             'display_name',
             'review_status',         #STATUS_APPROVED = 1;STATUS_PENDING = 2;STATUS_NOT_APPROVED = 3;
             'review_score',
+            'review_date',
             'sku',
             'product_title',
             'product_description',
@@ -110,7 +111,8 @@ class Yotpo_Yotpo_Model_Export_Csv extends Mage_Core_Model_Abstract
             $review->getDetail(),
             $review->getNickname(),
             $review->getStatusId(),
-            $this->calculateReviewScore($review)
+            $this->calculateReviewScore($review),
+            $review->getData("created_at")
         );
     }
 
