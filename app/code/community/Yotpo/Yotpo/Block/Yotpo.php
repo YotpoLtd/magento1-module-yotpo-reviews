@@ -73,7 +73,7 @@ class Yotpo_Yotpo_Block_Yotpo extends Mage_Core_Block_Template
     public function getProductDescription()
     {
     	$_product = $this->getProduct();
-    	$productDescription = Mage::helper('core')->htmlEscape(strip_tags($_product->getDescription()));
+    	$productDescription = Mage::helper('core')->htmlEscape(strip_tags($_product->getShortDescription()));
     	return $productDescription;
     }
 
@@ -84,4 +84,10 @@ class Yotpo_Yotpo_Block_Yotpo extends Mage_Core_Block_Template
     	$productUrl = $_product->getProductUrl();   	
     	return $productUrl; 	
     }
+
+    public function getProductRating()
+    {
+        
+    }
+
 }

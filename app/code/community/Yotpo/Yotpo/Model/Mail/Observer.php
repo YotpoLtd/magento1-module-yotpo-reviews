@@ -27,13 +27,13 @@ class Yotpo_Yotpo_Model_Mail_Observer
 
 			if ($order->getStatus() != 'complete') {
 				return $this;
-
 			}
 			$data = array();
 			
 			$data["email"] = $order->getCustomerEmail();
 			$data["customer_name"] = $order->getCustomerName();
 			$data["order_id"] = $order->getIncrementId();
+			$data["order_date"] = $order->getCreatedAtDate()->toString('yyyy-MM-dd HH:mm:ss');
 			$data['platform'] = 'magento';
 			$data['currency_iso'] = $order->getOrderCurrency()->getCode();
 			$data['products'] = Mage::helper('yotpo/apiClient')->prepareProductsData($order);

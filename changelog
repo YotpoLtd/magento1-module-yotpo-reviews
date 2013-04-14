@@ -1,3 +1,10 @@
 Avichay 2012-12-23
 1. Changed Widget to be presented automatically upon install on product pages
 2. Changed Yotpo configuration page on admin panel and added a new configuration field - disable default widget position
+
+2013-04-14 Avichay Etzioni
+Version 1.4.2
+1. Added tracking code for checkout pages to track orders conversion
+2. Changed purchases url to be taken according to store id
+3. changed the past orders logic to query from database bulks of orders 
+4. Support for configurable products

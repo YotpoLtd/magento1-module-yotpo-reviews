@@ -5,7 +5,6 @@ class Yotpo_Yotpo_Helper_ApiClient extends Mage_Core_Helper_Abstract
 	
 	const YOTPO_OAUTH_TOKEN_URL = "https://api.yotpo.com/oauth/token";
 	const YOTPO_API_URL = "https://api.yotpo.com/apps";
-	const ORDERS_PER_REQUEST = 200;
 
 	protected $app_key = null;
 	protected $secret = null;
@@ -72,18 +71,21 @@ class Yotpo_Yotpo_Helper_ApiClient extends Mage_Core_Helper_Abstract
 
 	public function prepareProductsData($order) 
 	{
-		$products = $order->getAllItems();
+		$products = $order->getAllVisibleItems();
 		$products_arr = array();
 		
 		foreach ($products as $product) {
 			
 			$product_data = array();
+
 			$product_data['name'] = $product->getName();
 			$full_product = Mage::getModel('catalog/product')->load($product->getProductId());
-			$product_data['url'] = Mage::getUrl($full_product->getUrlPath());	
+
+			$product_data['url'] = '';
 			$product_data['image'] = '';
 			try 
 			{
+				$product_data['url'] = Mage::app()->getStore($order->getStoreId())->getUrl($full_product->getUrlPath());
 				$product_data['image'] = $full_product->getImageUrl();	
 			} catch(Exception $e) {}
 			
@@ -115,6 +117,23 @@ class Yotpo_Yotpo_Helper_ApiClient extends Mage_Core_Helper_Abstract
 		}	
 	}
 
+	public function createApiGet($path) {
+		try 
+		{
+			$config = array('timeout' => 30);
+			$http = new Varien_Http_Adapter_Curl();
+			$feed_url = self::YOTPO_API_URL.DS.$path;
+			$http->serConfig($config);
+			$http->write(Zend_Http_Client::GET, $feed_url, '1.1', array('Content-Type: application/json'));
+			$resData = $http->read();
+			return $resData;
+
+		} catch (Exception $e) 
+		{
+			Mage::log('error: '.$e);
+		}
+	}
+
 	public function createPurchases($order) 
 	{
 		$this->createApiPost("purchases", $order);
@@ -122,14 +141,13 @@ class Yotpo_Yotpo_Helper_ApiClient extends Mage_Core_Helper_Abstract
 
 	public function massCreatePurchases($orders, $token) 
 	{
-		$chuncked_orders = array_chunk($orders, self::ORDERS_PER_REQUEST);
-		while($ordersChunk = array_pop($chuncked_orders)){
-			$data = array();
-			$data['utoken'] = $token;
-			$data['platform'] = 'magento';
-			$data['orders'] = $ordersChunk;
-			$this->createApiPost("purchases/mass_create", $data);	
-		}
+		
+		$data = array();
+		$data['utoken'] = $token;
+		$data['platform'] = 'magento';
+		$data['orders'] = $orders;
+		$this->createApiPost("purchases/mass_create", $data);	
+
 	}
 	
 }
