@@ -18,52 +18,52 @@
             <show_in_store>1</show_in_store>
             <groups>
 
-        		<!-- New groups go here -->
-		    	<yotpo_general_group translate="label">
-        			<label>Yotpo Widget Configurations</label>
-	        		<frontend_type>text</frontend_type>
-          			<sort_order>1</sort_order>
-          			<show_in_default>1</show_in_default>
-          			<show_in_website>1</show_in_website>
-          			<show_in_store>1</show_in_store>
-          			<comment>
-          				<![CDATA[
-          			
-          				<p>If you need help the Yotpo support team is here 24/7, don't hesitate to 
-          					<a href="https://www.yotpo.com/contact" target="_blank" title="yotpo-support">contact us</a>
-						      </p>
+                <!-- New groups go here -->
+                <yotpo_general_group translate="label">
+                    <label>Yotpo Widget Configurations</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>1</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <comment>
+                        <![CDATA[
+                        <p>Please enter in your <font color="red">Api App Key</font>  and <font color="red">Secret</font> in the fields below to finish the installation.</p>
+                        <p>If you need help the Yotpo support team is here 24/7, don't hesitate to 
+                            <a href="https://www.yotpo.com/contact" target="_blank" title="yotpo-support">contact us.</a>
+                              </p>
 
                     <p>Click <a href="http://support.yotpo.com/entries/22635391-advanced-magento-features" target="_blank" 
-                      title="yotpo">here</a> for advanced customizations guide. 
+                      title="yotpo">here</a> for the advanced customization guide. 
                     </p><br/>
-          				]]>
-          			</comment>
+                        ]]>
+                    </comment>
 
-          			
-          			<fields>
+                    
+                    <fields>
                         <yotpo_appkey>
-                            <label>Api Appkey</label>
+                            <label>Api App key</label>
                             <frontend_type>text</frontend_type>
                             <sort_order>1</sort_order>
                             <comment><![CDATA[Get your appkey at your yotpo account setting page. Click
-                            	<a href="https://b2b.yotpo.com/register" target="_blank" title="yotpo-sign-up">here</a>
-                            	to sign in to yotpo]]>
+                                <a href="https://b2b.yotpo.com/register" target="_blank" title="yotpo-sign-up">here</a>
+                                to sign in to yotpo]]>
                             </comment>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
                         </yotpo_appkey>  
                         <yotpo_secret>
-                        	<label>Secret</label>
-                        	<frontend_type>text</frontend_type>
-                        	<sort_order>2</sort_order>
-                        	<comment><![CDATA[Get your secret at your yotpo account setting page. Click
-                            	<a href="https://b2b.yotpo.com/register" target="_blank" title="yotpo-sign-up">here</a>
-                            	to sign in to yotpo]]>
-                        	</comment>
-                        	<show_in_default>1</show_in_default>
-                        	<show_in_website>1</show_in_website>
-                        	<show_in_store>1</show_in_store>
+                            <label>Secret</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>2</sort_order>
+                            <comment><![CDATA[Get your secret at your yotpo account setting page. Click
+                                <a href="https://b2b.yotpo.com/register" target="_blank" title="yotpo-sign-up">here</a>
+                                to sign in to yotpo]]>
+                            </comment>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
                         </yotpo_secret>
                         <disable_default_widget_position>
                             <label>Disable Default Widget Position</label>
@@ -97,12 +97,42 @@
                               ]]>
                             </comment>
                         </orders_export>
-                    </fields>
-        		</yotpo_general_group>
+                      </fields>
+                </yotpo_general_group>
+            <yotpo_rich_snippets_group translate="label">
+              <label>Google Rich Snippets</label>
+              <frontend_type>text</frontend_type>
+              <sort_order>3</sort_order>
+              <show_in_default>1</show_in_default>
+              <show_in_website>1</show_in_website>
+              <show_in_store>1</show_in_store>
+              <comment>
+                        <![CDATA[
+                        Show off your star ratings in Google with rich snippets.
+                        Learn more <a href="https://support.google.com/webmasters/answer/99170?hl=en">here</a>.
+                              <br/>
+                              <font color="red">
+                              *In order to activate rich snippets you will need to also tick the rich snippets tick box in your <a href="https://www.yotpo.com/customize/seo?utm_source=customers_magento_admin&utm_medium=link&utm_campaign=magento_rich_snippets" target="_blank">Yotpo admin</a></font>.<br/>]]>
+              </comment>
+
+            <fields>
+              <rich_snippets_disabled>
+                <label>Disable Rich Snippets</label>
+                <frontend_type>select</frontend_type>
+                  <source_model>adminhtml/system_config_source_yesno</source_model>
+                  <enabled>0</enabled>
+                  <sort_order>5</sort_order>
+                  <show_in_default>1</show_in_default>
+                  <show_in_website>1</show_in_website>
+                  <show_in_store>1</show_in_store>
+              </rich_snippets_disabled>
+            </fields>
+
+            </yotpo_rich_snippets_group>
             <yotpo_export_reviews_group translate="label">
               <label>Export Magento Built-In Reviews</label>
               <frontend_type>text</frontend_type>
-              <sort_order>3</sort_order>
+              <sort_order>4</sort_order>
               <show_in_default>1</show_in_default>
               <show_in_website>1</show_in_website>
               <show_in_store>1</show_in_store>
@@ -117,7 +147,7 @@
               </comment>
             </yotpo_export_reviews_group>
 
-      		</groups>
+            </groups>
         </yotpo>
     </sections>
 </config>

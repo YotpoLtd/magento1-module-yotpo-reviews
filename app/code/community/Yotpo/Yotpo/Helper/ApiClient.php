@@ -3,8 +3,10 @@
 class Yotpo_Yotpo_Helper_ApiClient extends Mage_Core_Helper_Abstract
 {
 	
-	const YOTPO_OAUTH_TOKEN_URL = "https://api.yotpo.com/oauth/token";
-	const YOTPO_API_URL = "https://api.yotpo.com/apps";
+	const YOTPO_OAUTH_TOKEN_URL   = "https://api.yotpo.com/oauth/token";
+	const YOTPO_SECURED_API_URL   = "https://api.yotpo.com";
+	const YOTPO_UNSECURED_API_URL = "http://api.yotpo.com";
+	const DEFAULT_TIMEOUT = 30;
 
 	protected $app_key = null;
 	protected $secret = null;
@@ -71,41 +73,48 @@ class Yotpo_Yotpo_Helper_ApiClient extends Mage_Core_Helper_Abstract
 
 	public function prepareProductsData($order) 
 	{
-		$products = $order->getAllVisibleItems();
+		$products = $order->getAllVisibleItems(); //filter out simple products
 		$products_arr = array();
 		
 		foreach ($products as $product) {
 			
+			//use configurable product instead of simple if still needed
+            $full_product = Mage::getModel('catalog/product')->load($product->getProductId());
+
+            $configurable_product_model = Mage::getModel('catalog/product_type_configurable');
+            $parentIds= $configurable_product_model->getParentIdsByChild($full_product->getId());
+            if (count($parentIds) > 0) {
+            	$full_product = Mage::getModel('catalog/product')->load($parentIds[0]);
+            }
+
 			$product_data = array();
 
-			$product_data['name'] = $product->getName();
-			$full_product = Mage::getModel('catalog/product')->load($product->getProductId());
-
+			$product_data['name'] = $full_product->getName();
 			$product_data['url'] = '';
 			$product_data['image'] = '';
 			try 
 			{
-				$product_data['url'] = Mage::app()->getStore($order->getStoreId())->getUrl($full_product->getUrlPath());
+				$product_data['url'] = Mage::app()->getStore($order->getStoreId())->getUrl($full_product->getUrlKey());
 				$product_data['image'] = $full_product->getImageUrl();	
 			} catch(Exception $e) {}
 			
 			$product_data['description'] = Mage::helper('core')->htmlEscape(strip_tags($full_product->getDescription()));
 			$product_data['price'] = $product->getPrice();
 
-			$products_arr[$product->getProductId()] = $product_data;
+			$products_arr[$full_product->getId()] = $product_data;
 			
 		}
 
 		return $products_arr;
 	}
 
-	public function createApiPost($path, $data) {
+	public function createApiPost($path, $data, $timeout=self::DEFAULT_TIMEOUT) {
 		try 
 		{
 
-			$config = array('timeout' => 30);
+			$config = array('timeout' => $timeout);
 			$http = new Varien_Http_Adapter_Curl();
-			$feed_url = self::YOTPO_API_URL.DS.$this->app_key.DS.$path;
+			$feed_url = self::YOTPO_SECURED_API_URL."/".$path;
 			$http->setConfig($config);
 			$http->write(Zend_Http_Client::POST, $feed_url, '1.1', array('Content-Type: application/json'), json_encode($data));
 			$resData = $http->read();
@@ -117,16 +126,16 @@ class Yotpo_Yotpo_Helper_ApiClient extends Mage_Core_Helper_Abstract
 		}	
 	}
 
-	public function createApiGet($path) {
+	public function createApiGet($path, $timeout=self::DEFAULT_TIMEOUT) {
 		try 
 		{
-			$config = array('timeout' => 30);
+			$config = array('timeout' => $timeout);
 			$http = new Varien_Http_Adapter_Curl();
-			$feed_url = self::YOTPO_API_URL.DS.$path;
-			$http->serConfig($config);
+			$feed_url = self::YOTPO_UNSECURED_API_URL."/".$path;
+			$http->setConfig($config);
 			$http->write(Zend_Http_Client::GET, $feed_url, '1.1', array('Content-Type: application/json'));
 			$resData = $http->read();
-			return $resData;
+			return array("code" => Zend_Http_Response::extractCode($resData), "body" => json_decode(Zend_Http_Response::extractBody($resData)));
 
 		} catch (Exception $e) 
 		{
@@ -136,7 +145,7 @@ class Yotpo_Yotpo_Helper_ApiClient extends Mage_Core_Helper_Abstract
 
 	public function createPurchases($order) 
 	{
-		$this->createApiPost("purchases", $order);
+		$this->createApiPost("apps/".$this->app_key."/purchases", $order);
 	}
 
 	public function massCreatePurchases($orders, $token) 
@@ -146,7 +155,7 @@ class Yotpo_Yotpo_Helper_ApiClient extends Mage_Core_Helper_Abstract
 		$data['utoken'] = $token;
 		$data['platform'] = 'magento';
 		$data['orders'] = $orders;
-		$this->createApiPost("purchases/mass_create", $data);	
+		$this->createApiPost("apps/".$this->app_key."/purchases/mass_create", $data);	
 
 	}
 	

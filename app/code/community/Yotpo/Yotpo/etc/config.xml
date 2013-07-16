@@ -3,7 +3,7 @@
 <config>
     <modules>
         <Yotpo_Yotpo>
-            <version>0.0.1</version>
+            <version>1.4.4</version>
         </Yotpo_Yotpo>
     </modules>
     
@@ -14,9 +14,19 @@
     		</yotpo>
     	</blocks>
     	<models>
-    		<yotpoyotpo>
+    		<yotpo>
     			<class>Yotpo_Yotpo_Model</class>
-    		</yotpoyotpo>
+                <resourceModel>yotpo_mysql4</resourceModel>
+    		</yotpo>
+
+            <yotpo_mysql4>
+            <class>Yotpo_Yotpo_Model_Mysql4</class>  
+            <entities>
+                <richsnippet>
+                    <table>yotpo_rich_snippets</table>
+                </richsnippet>
+            </entities>                
+            </yotpo_mysql4>
     	</models>
         <helpers>
             <yotpo>
@@ -34,6 +44,27 @@
 			  </observers>
 			</sales_order_save_after>
       	</events>
+        <resources>
+            <yotpo_setup>
+                <setup>
+                    <module>Yotpo_Yotpo</module>
+                    <class>Yotpo_Yotpo_Model_Resource_Mysql4_Setup</class>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </yotpo_setup>
+            <yotpo_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </yotpo_write>
+            <yotpo_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </yotpo_read>      
+        </resources>        
     </global>
     
     <admin>
