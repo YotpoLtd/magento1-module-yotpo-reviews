@@ -123,7 +123,7 @@ class Yotpo_Yotpo_Block_Yotpo extends Mage_Core_Block_Template
                     }
 
                     $snippet->setHtmlCode($htmlCode);
-                    $snippet->setExpirationTime(time() + $ttl);
+                    $snippet->setExpirationTime(date('Y-m-d H:i:s', time()));
                     $snippet->save();
                 }
                 return $snippet->getHtmlCode();
