@@ -102,7 +102,7 @@ class Yotpo_Yotpo_Block_Yotpo extends Mage_Core_Block_Template
                 if (($snippet == null) || (!$snippet->isValid())) {
                     //no snippet for product or snippet isn't valid anymore. get valid snippet code from yotpo api
                  
-                    $res = Mage::helper('yotpo/apiClient')->createApiGet("products/".($this->getAppKey())."/".$productId."/richsnippet", 2);
+                    $res = Mage::helper('yotpo/apiClient')->createApiGet("products/".($this->getAppKey())."/richsnippet/".$productId, 2);
                 
                     if ($res["code"] != 200) {
                         //product not found or feature disabled.
