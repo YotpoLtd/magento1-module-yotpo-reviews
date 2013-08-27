@@ -14,12 +14,6 @@ class Yotpo_Yotpo_Helper_ApiClient extends Mage_Core_Helper_Abstract
 
 	public function __construct()
 	{
-
-
-		$OAuthStorePath = Mage::getModuleDir('', 'Yotpo_Yotpo') . DS . 'lib' . DS .'oauth-php' . DS .'library' . DS .'YotpoOAuthStore.php';
-		$OAuthRequesterPath = Mage::getModuleDir('', 'Yotpo_Yotpo') . DS . 'lib' . DS .'oauth-php' . DS .'library' . DS .'YotpoOAuthRequester.php';
-		require_once ($OAuthStorePath);		
-		require_once ($OAuthRequesterPath);			
 		
 		$this->app_key = Mage::getStoreConfig('yotpo/yotpo_general_group/yotpo_appkey',Mage::app()->getStore());
 		$this->secret = Mage::getStoreConfig('yotpo/yotpo_general_group/yotpo_secret', Mage::app()->getStore());
@@ -38,24 +32,17 @@ class Yotpo_Yotpo_Helper_ApiClient extends Mage_Core_Helper_Abstract
 			Mage::log('Missing app key or secret');
 			return null;
 		}
-		$yotpo_options = array('consumer_key' => $this->app_key, 'consumer_secret' => $this->secret, 'client_id' => $this->app_key, 'client_secret' => $this->secret, 'grant_type' => 'client_credentials');	
-		YotpoOAuthStore::instance("2Leg", $yotpo_options);
+		
+		$yotpo_options = array('client_id' => $this->app_key, 'client_secret' => $this->secret, 'grant_type' => 'client_credentials');	
 		
 		try 
 		{
-			$request = new YotpoOAuthRequester(self::YOTPO_OAUTH_TOKEN_URL, "POST", $yotpo_options);
-			if (!$request) {
-				Mage::log('Failed to get token access from yotpo api');
-				return null;
-			}
-			$result = $request->doRequest(0);
-
-			$tokenParams = json_decode($result['body'], true);
-
-			return $tokenParams['access_token'];
+			$result = $this->createApiPost('oauth/token', $yotpo_options);
+			return $result['body']->access_token;
 		} 
-		catch(YotpoOAuthException2 $e) 
+		catch(Exception $e) 
 		{
+
 			Mage::log('error: ' .$e);
 			return null;
 		}
@@ -118,6 +105,8 @@ class Yotpo_Yotpo_Helper_ApiClient extends Mage_Core_Helper_Abstract
 			$http->setConfig($config);
 			$http->write(Zend_Http_Client::POST, $feed_url, '1.1', array('Content-Type: application/json'), json_encode($data));
 			$resData = $http->read();
+			return array("code" => Zend_Http_Response::extractCode($resData), "body" => json_decode(Zend_Http_Response::extractBody($resData)));
+
 
 		}
 		catch(Exception $e)
