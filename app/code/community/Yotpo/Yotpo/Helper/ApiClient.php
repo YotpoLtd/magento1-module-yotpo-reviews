@@ -15,8 +15,8 @@ class Yotpo_Yotpo_Helper_ApiClient extends Mage_Core_Helper_Abstract
 	public function __construct()
 	{
 		
-		$this->app_key = Mage::getStoreConfig('yotpo/yotpo_general_group/yotpo_appkey',Mage::app()->getStore());
-		$this->secret = Mage::getStoreConfig('yotpo/yotpo_general_group/yotpo_secret', Mage::app()->getStore());
+		$this->app_key = trim(Mage::getStoreConfig('yotpo/yotpo_general_group/yotpo_appkey',Mage::app()->getStore()));
+		$this->secret = trim(Mage::getStoreConfig('yotpo/yotpo_general_group/yotpo_secret', Mage::app()->getStore()));
 	}
 	
 

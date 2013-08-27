@@ -33,7 +33,7 @@ class Yotpo_Yotpo_Block_Conversion extends Mage_Checkout_Block_Onepage_Success
 
     public function getAppKey() 
     {
-        return Mage::getStoreConfig('yotpo/yotpo_general_group/yotpo_appkey',Mage::app()->getStore());
+        return trim(Mage::getStoreConfig('yotpo/yotpo_general_group/yotpo_appkey',Mage::app()->getStore()));
     }
 }
 
