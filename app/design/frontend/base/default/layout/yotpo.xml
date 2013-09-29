@@ -33,6 +33,7 @@
 		<reference name="content">
 			<block type="cms/block" name="yotpo" as="yotpo">
             	<block type="yotpo/yotpo" name="yotpo.bottomline" as="yotpo-bottomline" template="yotpo/bottomline.phtml"/>
+            	<block type="yotpo/yotpo" name="yotpo.reviews" as="yotpo-reviews" template="yotpo/reviews.phtml"/>
             </block>
         </reference>
 	</default>

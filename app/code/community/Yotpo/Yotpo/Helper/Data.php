@@ -10,22 +10,40 @@ class Yotpo_Yotpo_Helper_Data extends Mage_Core_Helper_Abstract
         $this->_config = Mage::getStoreConfig('yotpo');
     }
 
-	public function showWidget($thisObj)
+	public function showWidget($thisObj, $product = null)
 	{
-		echo $thisObj->getChildHtml('yotpo-reviews');
+		$this->renderYotpoProductBlock($thisObj, 'yotpo-reviews', $product);	
 	}
 	
 	public function showBottomline($thisObj, $product = null)
 	{
-		
-		$block = $thisObj->getLayout()->getBlock('content')->getChild('yotpo')->getChild('yotpo-bottomline');
-							
+
+		$this->renderYotpoProductBlock($thisObj, 'yotpo-bottomline', $product);
+	}
+
+	private function renderYotpoProductBlock($thisObj, $blockName, $product = null) 
+	{
+		$block = $thisObj->getLayout()->getBlock('content')->getChild('yotpo');
+		if ($block == null) {
+			Mage::log("can't find yotpo block");
+			return;
+		}
+
+		$block = $block->getChild($blockName);
+		if ($block == null) {
+			Mage::log("can't find yotpo child named: ".$blockName);
+			return;
+		}
+
 		if ($product != null) 
 		{
 			$block->setAttribute('product', $product);
 		}
-							
-		echo $block->toHtml();
+		if ($block != null) 
+		{
+			echo $block->toHtml();	
+		}
+		
 	}
 	
 }
