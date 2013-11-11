@@ -4,9 +4,13 @@
 
 <script type="text/javascript">
     //<![CDATA[
+
     function exportOrders() {
         new Ajax.Request('<?php echo $this->getAjaxExportUrl() ?>', {
             method:     'get',
+            parameters: {
+                "store" : "<?php echo Mage::app()->getRequest()->getParam('store', 0); ?>"
+            },
             onComplete: function(transport){
 
                 if (transport.responseText == 1 || [408, 504, 598, 599].indexOf(transport.status) > -1){

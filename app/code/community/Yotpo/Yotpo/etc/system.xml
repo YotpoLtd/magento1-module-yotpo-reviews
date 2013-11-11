@@ -13,8 +13,8 @@
             <tab>yotpo</tab>
             <frontend_type>text</frontend_type>
             <sort_order>110</sort_order>
-            <show_in_default>1</show_in_default>
-            <show_in_website>1</show_in_website>
+            <show_in_default>0</show_in_default>
+            <show_in_website>0</show_in_website>
             <show_in_store>1</show_in_store>
             <groups>
 
@@ -23,8 +23,8 @@
                     <label>Yotpo Widget Configurations</label>
                     <frontend_type>text</frontend_type>
                     <sort_order>1</sort_order>
-                    <show_in_default>1</show_in_default>
-                    <show_in_website>1</show_in_website>
+                    <show_in_default>0</show_in_default>
+                    <show_in_website>0</show_in_website>
                     <show_in_store>1</show_in_store>
                     <comment>
                         <![CDATA[
@@ -46,11 +46,11 @@
                             <frontend_type>text</frontend_type>
                             <sort_order>1</sort_order>
                             <comment><![CDATA[Get your appkey at your yotpo account setting page. Click
-                                <a href="https://b2b.yotpo.com/register" target="_blank" title="yotpo-sign-up">here</a>
+                                <a href="https://www.yotpo.com/register" target="_blank" title="yotpo-sign-up">here</a>
                                 to sign in to yotpo]]>
                             </comment>
-                            <show_in_default>1</show_in_default>
-                            <show_in_website>1</show_in_website>
+                            <show_in_default>0</show_in_default>
+                            <show_in_website>0</show_in_website>
                             <show_in_store>1</show_in_store>
                         </yotpo_appkey>  
                         <yotpo_secret>
@@ -58,11 +58,11 @@
                             <frontend_type>text</frontend_type>
                             <sort_order>2</sort_order>
                             <comment><![CDATA[Get your secret at your yotpo account setting page. Click
-                                <a href="https://b2b.yotpo.com/register" target="_blank" title="yotpo-sign-up">here</a>
+                                <a href="https://www.yotpo.com/register" target="_blank" title="yotpo-sign-up">here</a>
                                 to sign in to yotpo]]>
                             </comment>
-                            <show_in_default>1</show_in_default>
-                            <show_in_website>1</show_in_website>
+                            <show_in_default>0</show_in_default>
+                            <show_in_website>0</show_in_website>
                             <show_in_store>1</show_in_store>
                         </yotpo_secret>
                         <disable_default_widget_position>
@@ -76,8 +76,8 @@
                               By choosing not to use the deafult position, you'll need to follow the instructions in the 
                               <br/><a href="http://support.yotpo.com/entries/22635391-advanced-magento-features" target="_blank" title="advanced-cusomization-guide">advanced customizations guide</a>]]>
                             </comment>
-                            <show_in_default>1</show_in_default>
-                            <show_in_website>1</show_in_website>
+                            <show_in_default>0</show_in_default>
+                            <show_in_website>0</show_in_website>
                             <show_in_store>1</show_in_store>
                         </disable_default_widget_position>
                         <orders_export translate="label">
@@ -87,8 +87,8 @@
                               yotpo/adminhtml_system_config_form_button
                             </frontend_model>
                             <sort_order>20</sort_order>
-                            <show_in_default>1</show_in_default>
-                            <show_in_website>1</show_in_website>
+                            <show_in_default>0</show_in_default>
+                            <show_in_website>0</show_in_website>
                             <show_in_store>1</show_in_store>
                             <comment>
                               <![CDATA[
@@ -103,8 +103,8 @@
               <label>Google Rich Snippets</label>
               <frontend_type>text</frontend_type>
               <sort_order>3</sort_order>
-              <show_in_default>1</show_in_default>
-              <show_in_website>1</show_in_website>
+              <show_in_default>0</show_in_default>
+              <show_in_website>0</show_in_website>
               <show_in_store>1</show_in_store>
               <comment>
                         <![CDATA[
@@ -122,8 +122,8 @@
                   <source_model>adminhtml/system_config_source_yesno</source_model>
                   <enabled>0</enabled>
                   <sort_order>5</sort_order>
-                  <show_in_default>1</show_in_default>
-                  <show_in_website>1</show_in_website>
+                  <show_in_default>0</show_in_default>
+                  <show_in_website>0</show_in_website>
                   <show_in_store>1</show_in_store>
               </rich_snippets_disabled>
             </fields>
@@ -133,8 +133,8 @@
               <label>Export Magento Built-In Reviews</label>
               <frontend_type>text</frontend_type>
               <sort_order>4</sort_order>
-              <show_in_default>1</show_in_default>
-              <show_in_website>1</show_in_website>
+              <show_in_default>0</show_in_default>
+              <show_in_website>0</show_in_website>
               <show_in_store>1</show_in_store>
               <comment>
                 <![CDATA[

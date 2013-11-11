@@ -1,23 +1,23 @@
 <?php
 
 class Yotpo_Yotpo_Block_Yotpo extends Mage_Core_Block_Template
-{	
+{
     public function __construct()
     {
     	parent::__construct();
     }
-    
-    public function setProduct($product) 
+
+    public function setProduct($product)
     {
     	$this->setData('product', $product);
     	$_product = $this->getProduct();
-    	echo $_product->getName();	
+    	echo $_product->getName();
     }
-    
-    
-    public function getProduct() 
-	{       
-        if (!$this->hasData('product')) 
+
+
+    public function getProduct()
+	{
+        if (!$this->hasData('product'))
         {
             $this->setData('product', Mage::registry('product'));
         }
@@ -30,53 +30,46 @@ class Yotpo_Yotpo_Block_Yotpo extends Mage_Core_Block_Template
             }
         return $product;
     }
-    
-    public function getProductId() 
-    {   		
+
+    public function getProductId()
+    {
      	$_product = $this->getProduct();
      	$productId = $_product->getId();
     	return $productId;
     }
 
-    
-    public function getAppKey() 
+
+    public function getAppKey()
     {
-  
+
    	 	return trim(Mage::getStoreConfig('yotpo/yotpo_general_group/yotpo_appkey',Mage::app()->getStore()));
     }
-    
+
     public function getProductName()
     {
     	$_product = $this->getProduct();
     	$productName = $_product->getName();
-    	
-    	return $productName;
+
+    	return htmlspecialchars($productName);
     }
-    
+
     public function getProductImageUrl()
-	{
-		$_product = $this->getProduct();
-    	$productImageUrl = $_product->getImageUrl();
-		return $productImageUrl;
-	}
-	
-	 public function getDomain()
     {
     	return Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_WEB);
     }
-    
+
     public function getProductBreadcrumbs()
     {
     	return "";
     }
-    
-     public function getProductModel() 
+
+     public function getProductModel()
     {
     	$_product = $this->getProduct();
     	$productModel = $_product->getData('sku');
-    	return $productModel;
+    	return htmlspecialchars($productModel);
     }
-    
+
     public function getProductDescription()
     {
     	$_product = $this->getProduct();
@@ -88,22 +81,21 @@ class Yotpo_Yotpo_Block_Yotpo extends Mage_Core_Block_Template
         return !Mage::getStoreConfig('yotpo/yotpo_rich_snippets_group/rich_snippets_disabled',Mage::app()->getStore());
     }
 
-    public function getRichSnippet() 
+    public function getRichSnippet()
     {
 
         if ($this->isRichSnippetEnabled()) {
-            
+
             try {
 
                 $productId = $this->getProductId();
-
-                $snippet = Mage::getModel('yotpo/richsnippet')->getSnippetByProductId($productId);
+                $snippet = Mage::getModel('yotpo/richsnippet')->getSnippetByProductIdAndStoreId($productId, Mage::app()->getStore()->getId());
 
                 if (($snippet == null) || (!$snippet->isValid())) {
                     //no snippet for product or snippet isn't valid anymore. get valid snippet code from yotpo api
-                 
+
                     $res = Mage::helper('yotpo/apiClient')->createApiGet("products/".($this->getAppKey())."/richsnippet/".$productId, 2);
-                
+
                     if ($res["code"] != 200) {
                         //product not found or feature disabled.
                         return "";
@@ -120,6 +112,7 @@ class Yotpo_Yotpo_Block_Yotpo extends Mage_Core_Block_Template
                     if ($snippet == null) {
                         $snippet = Mage::getModel('yotpo/richsnippet');
                         $snippet->setProductId($productId);
+                        $snippet->setStoreId(Mage::app()->getStore()->getid());
                     }
 
                     $snippet->setHtmlCode($htmlCode);
@@ -130,22 +123,22 @@ class Yotpo_Yotpo_Block_Yotpo extends Mage_Core_Block_Template
 
             } catch(Excpetion $e) {
                 Mage::log($e);
-            }       
+            }
         }
         return "";
     }
 
-     
+
     public function getProductUrl()
     {
     	$_product = $this->getProduct();
-    	$productUrl = $_product->getProductUrl();   	
-    	return $productUrl; 	
+    	$productUrl = $_product->getProductUrl();
+    	return $productUrl;
     }
 
     public function getProductRating()
     {
-        
+
     }
 
 }

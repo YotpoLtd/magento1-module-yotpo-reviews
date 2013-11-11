@@ -15,20 +15,39 @@ class Yotpo_Yotpo_Adminhtml_YotpoController extends Mage_Adminhtml_Controller_Ac
        
             $result = null;
 
-            if (Mage::getStoreConfig('yotpo/yotpo_general_group/yotpo_appkey',Mage::app()->getStore()) == null or 
-                Mage::getStoreConfig('yotpo/yotpo_general_group/yotpo_secret',Mage::app()->getStore()) == null
+            $store_code = Mage::app()->getRequest()->getParam('store');
+            Mage::log('The current store code is ' . $store_code);
+
+            $current_store = null;
+
+            foreach (Mage::app()->getStores() as $store) {
+                Mage::log('Store: '.$store->getCode().' active: '.$store->getIsActive());
+                if ($store->getCode() == $store_code) {
+                    Mage::log('Found store!');
+                    global $current_store;
+                    $current_store = $store;
+                    break;
+                }
+            }
+
+            $store_id = $current_store->getId();
+            Mage::log('Current store id is '.$store_id);
+
+            if (Mage::getStoreConfig('yotpo/yotpo_general_group/yotpo_appkey', $current_store) == null or
+                Mage::getStoreConfig('yotpo/yotpo_general_group/yotpo_secret', $current_store) == null
                 )
             {
-               Mage::app()->getResponse()->setBody('Please make sure you insert your APP KEY and SECRET and save configuration before trying to export past orders'); 
+               Mage::app()->getResponse()->setBody('Please make sure you insert your APP KEY and SECRET and save configuration before trying to export past orders');
+                Mage::log('exiting...');
                 return;   
             }
 
-            $token = Mage::helper('yotpo/apiClient')->oauthAuthentication();
+            $token = Mage::helper('yotpo/apiClient')->oauthAuthentication($store_id);
             if ($token == null) 
             {
                 
-                Mage::app()->getResponse()->setBody("Please make sure the APP KEY and SECRET you've entered are correct"); 
-                return;  
+                Mage::app()->getResponse()->setBody("Please make sure the APP KEY and SECRET you've entered are correct");
+                return;
             }
 
 
@@ -38,7 +57,8 @@ class Yotpo_Yotpo_Adminhtml_YotpoController extends Mage_Adminhtml_Controller_Ac
             $offset = 0;
             $salesModel=Mage::getModel("sales/order");
             $salesCollection = $salesModel->getCollection()
-                    ->addFieldToFilter('status', 'complete') 
+                    ->addFieldToFilter('status', 'complete')
+                    ->addFieldToFilter('store_id', $store_id)
                     ->addAttributeToFilter('created_at', array('gteq' =>$from))
                     ->addAttributeToSort('created_at', 'DESC')
                     ->setPageSize(self::MAX_BULK_SIZE);
@@ -70,7 +90,7 @@ class Yotpo_Yotpo_Adminhtml_YotpoController extends Mage_Adminhtml_Controller_Ac
 
                     if (count($orders) > 0) 
                     {
-                        Mage::helper('yotpo/apiClient')->massCreatePurchases($orders, $token);    
+                        Mage::helper('yotpo/apiClient')->massCreatePurchases($orders, $token, $store_id);
                     }
                     
                 } catch (Exception $e) {

@@ -8,32 +8,35 @@ class Yotpo_Yotpo_Helper_ApiClient extends Mage_Core_Helper_Abstract
 	const YOTPO_UNSECURED_API_URL = "http://api.yotpo.com";
 	const DEFAULT_TIMEOUT = 30;
 
-	protected $app_key = null;
-	protected $secret = null;
+	
 	protected $disable_feature = null;
+
+    protected $app_keys = array();
+    protected $secrets = array();
 
 	public function __construct()
 	{
-		
-		$this->app_key = trim(Mage::getStoreConfig('yotpo/yotpo_general_group/yotpo_appkey',Mage::app()->getStore()));
-		$this->secret = trim(Mage::getStoreConfig('yotpo/yotpo_general_group/yotpo_secret', Mage::app()->getStore()));
+        Mage::log('In constructor of ApiClient');
+        foreach (Mage::app()->getStores() as $store) {
+            $store_id = $store->getId();
+            $this->app_keys[$store_id] = trim(Mage::getStoreConfig('yotpo/yotpo_general_group/yotpo_appkey', $store));
+            $this->secrets[$store_id] = trim(Mage::getStoreConfig('yotpo/yotpo_general_group/yotpo_secret', $store));
+        }
 	}
-	
 
-	/**
-	* send an api call to yotpo to authenticate and get an access token
-	* @return access token
-	*/
-	public function oauthAuthentication() 
+	public function oauthAuthentication($store_id)
 	{
 
-		if ($this->app_key == null or $this->secret == null) 
+        $store_app_key = $this->app_keys[$store_id];
+        $store_secret = $this->secrets[$store_id];
+
+		if ($store_app_key == null or $store_secret == null)
 		{
 			Mage::log('Missing app key or secret');
 			return null;
 		}
 		
-		$yotpo_options = array('client_id' => $this->app_key, 'client_secret' => $this->secret, 'grant_type' => 'client_credentials');	
+		$yotpo_options = array('client_id' => $store_app_key, 'client_secret' => $store_secret, 'grant_type' => 'client_credentials');
 		
 		try 
 		{
@@ -48,10 +51,10 @@ class Yotpo_Yotpo_Helper_ApiClient extends Mage_Core_Helper_Abstract
 		}
 	}
 
-	public function isEnabled() 
+	public function isEnabled($store_id)
 	{
 		//check if both app_key and secret exist
-		if(($this->app_key == null) or ($this->secret == null))
+		if(($this->app_keys[$store_id] == null) or ($this->secrets[$store_id] == null))
 		{
 			return false;
 		}
@@ -132,19 +135,24 @@ class Yotpo_Yotpo_Helper_ApiClient extends Mage_Core_Helper_Abstract
 		}
 	}
 
-	public function createPurchases($order) 
+    public function getAppKey($store_id)
+    {
+        return $this->app_keys[$store_id];
+    }
+
+	public function createPurchases($order, $store_id)
 	{
-		$this->createApiPost("apps/".$this->app_key."/purchases", $order);
+       	$this->createApiPost("apps/".$this->app_keys[$store_id]."/purchases", $order);
 	}
 
-	public function massCreatePurchases($orders, $token) 
+	public function massCreatePurchases($orders, $token, $store_id)
 	{
-		
+
 		$data = array();
 		$data['utoken'] = $token;
 		$data['platform'] = 'magento';
 		$data['orders'] = $orders;
-		$this->createApiPost("apps/".$this->app_key."/purchases/mass_create", $data);	
+		$this->createApiPost("apps/".$this->app_keys[$store_id]."/purchases/mass_create", $data);
 
 	}
 	
