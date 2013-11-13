@@ -1,40 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <layout version="0.1.0">
 
-	<catalog_product_view>
-		<reference name="content">
-			<block type="yotpo/yotpo" name="yreviews" as ="yreviews" template="yotpo/default_reviews.phtml" 
-				after="product.info">
-			</block>
-		</reference>
+    <catalog_product_view>
+        <reference name="content">
+            <block type="yotpo/yotpo" name="yreviews" as ="yreviews" template="yotpo/default_reviews.phtml"
+                   after="product.info">
+            </block>
+        </reference>
 
         <reference name="product.info">
             <block type="yotpo/yotpo" name="yotpo.reviews" as="yotpo-reviews" template="yotpo/reviews.phtml"/>
         </reference>
-	</catalog_product_view>
+    </catalog_product_view>
 
-	<checkout_onepage_success>
+    <checkout_onepage_success>
         <reference name="before_body_end">
-            <block type="yotpo/conversion" 
-              name="yotpo_conversion_tracking"
-              template="yotpo/conversion.phtml" />
+            <block type="yotpo/conversion"
+                   name="yotpo_conversion_tracking"
+                   template="yotpo/conversion.phtml" />
         </reference>
     </checkout_onepage_success>
-	
-	<default>
-		<reference name="head">
-			<block type="core/text" name="yotpo.js">
-				<action method="setText">
-					<text><![CDATA[<script src ="https://www.yotpo.com/js/yQuery.js"></script>]]></text>
-				</action>
-			</block>    
-  		</reference>   
-	
-		<reference name="content">
-			<block type="cms/block" name="yotpo" as="yotpo">
-            	<block type="yotpo/yotpo" name="yotpo.bottomline" as="yotpo-bottomline" template="yotpo/bottomline.phtml"/>
-            	<block type="yotpo/yotpo" name="yotpo.reviews" as="yotpo-reviews" template="yotpo/reviews.phtml"/>
+
+    <default>
+        <reference name="head">
+            <block type="yotpo/yotpo" as="yotpo-js" template="yotpo/app_key_js.phtml" name="yotpo.js">
             </block>
         </reference>
-	</default>
+
+        <reference name="content">
+            <block type="cms/block" name="yotpo" as="yotpo">
+                <block type="yotpo/yotpo" name="yotpo.bottomline" as="yotpo-bottomline" template="yotpo/bottomline.phtml"/>
+                <block type="yotpo/yotpo" name="yotpo.reviews" as="yotpo-reviews" template="yotpo/reviews.phtml"/>
+            </block>
+        </reference>
+    </default>
 </layout>
