@@ -128,11 +128,9 @@ class Yotpo_Yotpo_Block_Yotpo extends Mage_Core_Block_Template
         return "";
     }
 
-
     public function getProductUrl()
     {
-    	$_product = $this->getProduct();
-    	$productUrl = $_product->getProductUrl();
+        $productUrl = Mage::app()->getStore()->getCurrentUrl();
     	return $productUrl;
     }
 
