@@ -63,7 +63,8 @@ class Yotpo_Yotpo_Helper_ApiClient extends Mage_Core_Helper_Abstract
 
 	public function prepareProductsData($order) 
 	{
-		$products = $order->getAllVisibleItems(); //filter out simple products
+        Mage::app()->setCurrentStore($order->getStoreId());
+        $products = $order->getAllVisibleItems(); //filter out simple products
 		$products_arr = array();
 		
 		foreach ($products as $product) {
