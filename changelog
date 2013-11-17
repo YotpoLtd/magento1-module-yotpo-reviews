@@ -16,3 +16,6 @@ Version 1.4.2
 1. Fixed bug 1121 - Product URLs are incorrect when retrieved as a result of a review
 2. Fixed bug 1222 - Testimonials don't work in magento
 3. Fixed bug 1214 - product details (name, description etc.) are now imported per store view configuration
+
+2013-11-17 Dan Bar-Yaakov
+1. Fixed bug 1057 - Exception on import image when writing review
