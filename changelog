@@ -19,3 +19,4 @@ Version 1.4.2
 
 2013-11-17 Dan Bar-Yaakov
 1. Fixed bug 1057 - Exception on import image when writing review
+2. Switched to new yquery
