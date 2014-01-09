@@ -19,15 +19,18 @@ class Yotpo_Yotpo_Model_Mail_Observer
 
 			$event = $observer->getEvent();
 			$order = $event->getOrder();
-            $store_id = $order->getStoreId();
+			$store_id = $order->getStoreId();
+			$orderStatus = Mage::getStoreConfig('yotpo/yotpo_general_group/custom_order_status', $order->getStore());
+			if ($orderStatus == null) {
+				$orderStatus = 'complete';
+			}
 
-            Mage::log('checking if enabled for store '.$store_id);
             if (!Mage::helper('yotpo/apiClient')->isEnabled($store_id))
             {
                 return $this;
             }
 
-			if ($order->getStatus() != 'complete') {
+			if ($order->getStatus() != $orderStatus) {
 				return $this;
 			}
 			$data = array();

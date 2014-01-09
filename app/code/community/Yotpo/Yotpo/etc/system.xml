@@ -97,6 +97,16 @@
                               ]]>
                             </comment>
                         </orders_export>
+                        <custom_order_status translate="label">
+                            <label>Custom Order Status</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>21</sort_order>
+                            <comment>
+                            </comment>
+                            <show_in_default>0</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </custom_order_status>
                       </fields>
                 </yotpo_general_group>
             <yotpo_rich_snippets_group translate="label">

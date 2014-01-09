@@ -16,14 +16,11 @@ class Yotpo_Yotpo_Adminhtml_YotpoController extends Mage_Adminhtml_Controller_Ac
             $result = null;
 
             $store_code = Mage::app()->getRequest()->getParam('store');
-            Mage::log('The current store code is ' . $store_code);
 
             $current_store = null;
 
             foreach (Mage::app()->getStores() as $store) {
-                Mage::log('Store: '.$store->getCode().' active: '.$store->getIsActive());
                 if ($store->getCode() == $store_code) {
-                    Mage::log('Found store!');
                     global $current_store;
                     $current_store = $store;
                     break;
@@ -31,14 +28,12 @@ class Yotpo_Yotpo_Adminhtml_YotpoController extends Mage_Adminhtml_Controller_Ac
             }
 
             $store_id = $current_store->getId();
-            Mage::log('Current store id is '.$store_id);
 
             if (Mage::getStoreConfig('yotpo/yotpo_general_group/yotpo_appkey', $current_store) == null or
                 Mage::getStoreConfig('yotpo/yotpo_general_group/yotpo_secret', $current_store) == null
                 )
             {
                Mage::app()->getResponse()->setBody('Please make sure you insert your APP KEY and SECRET and save configuration before trying to export past orders');
-                Mage::log('exiting...');
                 return;   
             }
 
@@ -56,8 +51,12 @@ class Yotpo_Yotpo_Adminhtml_YotpoController extends Mage_Adminhtml_Controller_Ac
             $from = date("Y-m-d", $last);
             $offset = 0;
             $salesModel=Mage::getModel("sales/order");
+            $orderStatus = Mage::getStoreConfig('yotpo/yotpo_general_group/custom_order_status', $current_store);
+            if ($orderStatus == null) {
+                $orderStatus = 'complete';
+            }
             $salesCollection = $salesModel->getCollection()
-                    ->addFieldToFilter('status', 'complete')
+                    ->addFieldToFilter('status', $orderStatus)
                     ->addFieldToFilter('store_id', $store_id)
                     ->addAttributeToFilter('created_at', array('gteq' =>$from))
                     ->addAttributeToSort('created_at', 'DESC')
