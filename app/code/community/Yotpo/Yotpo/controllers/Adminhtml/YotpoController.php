@@ -51,12 +51,14 @@ class Yotpo_Yotpo_Adminhtml_YotpoController extends Mage_Adminhtml_Controller_Ac
             $from = date("Y-m-d", $last);
             $offset = 0;
             $salesModel=Mage::getModel("sales/order");
-            $orderStatus = Mage::getStoreConfig('yotpo/yotpo_general_group/custom_order_status', $current_store);
-            if ($orderStatus == null) {
-                $orderStatus = 'complete';
+            $orderStatuses = Mage::getStoreConfig('yotpo/yotpo_general_group/custom_order_status', $current_store);
+            if ($orderStatuses == null) {
+                $orderStatuses = array('complete');
+            } else {
+                $orderStatuses = array_map('strtolower', explode(' ', $orderStatuses));
             }
             $salesCollection = $salesModel->getCollection()
-                    ->addFieldToFilter('status', $orderStatus)
+                    ->addFieldToFilter('status', $orderStatuses)
                     ->addFieldToFilter('store_id', $store_id)
                     ->addAttributeToFilter('created_at', array('gteq' =>$from))
                     ->addAttributeToSort('created_at', 'DESC')

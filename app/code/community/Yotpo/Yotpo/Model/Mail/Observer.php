@@ -20,9 +20,11 @@ class Yotpo_Yotpo_Model_Mail_Observer
 			$event = $observer->getEvent();
 			$order = $event->getOrder();
 			$store_id = $order->getStoreId();
-			$orderStatus = Mage::getStoreConfig('yotpo/yotpo_general_group/custom_order_status', $order->getStore());
-			if ($orderStatus == null) {
-				$orderStatus = 'complete';
+			$orderStatuses = Mage::getStoreConfig('yotpo/yotpo_general_group/custom_order_status', $order->getStore());
+			if ($orderStatuses == null) {
+				$orderStatuses = array('complete');
+			} else {
+				$orderStatuses = array_map('strtolower', explode(' ', $orderStatuses));
 			}
 
             if (!Mage::helper('yotpo/apiClient')->isEnabled($store_id))
@@ -30,7 +32,7 @@ class Yotpo_Yotpo_Model_Mail_Observer
                 return $this;
             }
 
-			if ($order->getStatus() != $orderStatus) {
+			if (!in_array($order->getStatus(), $orderStatuses)) {
 				return $this;
 			}
 			$data = array();
