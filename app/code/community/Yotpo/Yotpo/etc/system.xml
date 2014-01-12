@@ -98,10 +98,13 @@
                             </comment>
                         </orders_export>
                         <custom_order_status translate="label">
-                            <label>Custom Order Status</label>
+                            <label>Custom Mail After Purchase Order Status</label>
                             <frontend_type>text</frontend_type>
                             <sort_order>21</sort_order>
                             <comment>
+                              <![CDATA[
+                              Customize your Mail After Purchase order status. By default, the Mail After Purchase is sent when the order is marked "Complete".
+                              ]]>
                             </comment>
                             <show_in_default>0</show_in_default>
                             <show_in_website>0</show_in_website>
