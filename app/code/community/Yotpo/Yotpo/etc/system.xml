@@ -103,7 +103,7 @@
                             <sort_order>21</sort_order>
                             <comment>
                               <![CDATA[
-                              Customize your Mail After Purchase order status. By default, the Mail After Purchase is sent when the order is marked "Complete".
+                              Customize the order status that will trigger the Mail After Purchase e-mail. By default, the MAP is sent when the order is marked "Complete". Other common statuses are "Shipped," "Pending," or "Received." You can input multiple customer statuses separated by spaces.
                               ]]>
                             </comment>
                             <show_in_default>0</show_in_default>

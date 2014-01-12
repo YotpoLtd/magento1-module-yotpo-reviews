@@ -121,4 +121,12 @@
             </resources>
         </acl>
     </adminhtml>
+
+    <default>
+        <yotpo>
+            <yotpo_general_group>
+                <custom_order_status>complete</custom_order_status>
+            </yotpo_general_group>
+        </yotpo>
+    </default>
 </config>
