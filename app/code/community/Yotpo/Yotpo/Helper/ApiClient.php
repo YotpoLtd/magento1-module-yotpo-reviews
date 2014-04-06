@@ -16,7 +16,6 @@ class Yotpo_Yotpo_Helper_ApiClient extends Mage_Core_Helper_Abstract
 
 	public function __construct()
 	{
-        Mage::log('In constructor of ApiClient');
         foreach (Mage::app()->getStores() as $store) {
             $store_id = $store->getId();
             $this->app_keys[$store_id] = trim(Mage::getStoreConfig('yotpo/yotpo_general_group/yotpo_appkey', $store));
@@ -45,7 +44,6 @@ class Yotpo_Yotpo_Helper_ApiClient extends Mage_Core_Helper_Abstract
 		} 
 		catch(Exception $e) 
 		{
-
 			Mage::log('error: ' .$e);
 			return null;
 		}

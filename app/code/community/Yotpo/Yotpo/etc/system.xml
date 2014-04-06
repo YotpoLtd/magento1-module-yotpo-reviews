@@ -9,16 +9,33 @@
     
     <sections>
         <yotpo module="yotpo">
-            <label>Yotpo Social Reviews Software</label>
+            <label>Yotpo Product Reviews Software</label>
             <tab>yotpo</tab>
             <frontend_type>text</frontend_type>
             <sort_order>110</sort_order>
-            <show_in_default>0</show_in_default>
-            <show_in_website>0</show_in_website>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
             <show_in_store>1</show_in_store>
             <groups>
 
-                <!-- New groups go here -->
+              <default_config_group translate="label">
+              <label>Yotpo Settings</label>
+              <frontend_type>text</frontend_type>
+              <sort_order>1</sort_order>
+              <show_in_default>1</show_in_default>
+              <show_in_website>1</show_in_website>
+              <show_in_store>0</show_in_store>
+              <comment>
+                <![CDATA[
+                  <p>Yotpo is a popular product reviews solution among Magento store owners.</p>
+                  <p>To edit your Yotpo settings, select the relevant store view from the "Current Configuration Scope" dropdown on the left. <br/>Once selected, click on the "Yotpo Product Reviews Software" link in the menu on the left-hand side.
+                  </p>
+                  <br/>
+                ]]>
+              </comment>
+            </default_config_group>
+
+              
                 <yotpo_general_group translate="label">
                     <label>Yotpo Widget Configurations</label>
                     <frontend_type>text</frontend_type>
