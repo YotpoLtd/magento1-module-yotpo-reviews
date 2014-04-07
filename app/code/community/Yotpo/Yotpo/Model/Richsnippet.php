@@ -15,9 +15,7 @@ class Yotpo_Yotpo_Model_Richsnippet extends Mage_Core_Model_Abstract
 
     public function getSnippetByProductIdAndStoreId($product_id, $store_id)
     {
-        Mage::log('ingetSnippetByProductIdAndStoreId');
         $col = $this->getCollection()->addFieldToFilter('store_id', $store_id);
-        Mage::log('Returned collection with '.$col->getSize().' objects');
         if ($col->getSize() == 0) {
             return null;
         }

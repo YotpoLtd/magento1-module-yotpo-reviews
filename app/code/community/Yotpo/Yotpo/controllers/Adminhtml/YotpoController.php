@@ -39,8 +39,7 @@ class Yotpo_Yotpo_Adminhtml_YotpoController extends Mage_Adminhtml_Controller_Ac
 
             $token = Mage::helper('yotpo/apiClient')->oauthAuthentication($store_id);
             if ($token == null) 
-            {
-                
+            {                
                 Mage::app()->getResponse()->setBody("Please make sure the APP KEY and SECRET you've entered are correct");
                 return;
             }

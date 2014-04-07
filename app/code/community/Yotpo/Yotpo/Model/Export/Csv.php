@@ -60,7 +60,6 @@ class Yotpo_Yotpo_Model_Export_Csv extends Mage_Core_Model_Abstract
     protected function writeReview($review, $fp)
     {
         $productId = $review->getData("entity_pk_value");
-        Mage::log('store id: '.Mage::app()->getStore()->getId());
         $record = array_merge($this->getReviewItemValues($review), $this->getProductItemValues($productId));
         fputcsv($fp, $record, self::DELIMITER, self::ENCLOSURE);
     }

@@ -27,6 +27,15 @@ class Yotpo_Yotpo_Helper_Data extends Mage_Core_Helper_Abstract
         }
     }
 
+    public function showQABottomline($thisObj, $product = null, $print=true)
+    {
+
+        $res = $this->renderYotpoProductBlock($thisObj, 'yotpo-qa-bottomline', $product);
+        if ($print == false){
+            return $res;
+        }
+    }
+
     private function renderYotpoProductBlock($thisObj, $blockName, $product = null, $print=true)
     {
         $block = $thisObj->getLayout()->getBlock('content')->getChild('yotpo');
