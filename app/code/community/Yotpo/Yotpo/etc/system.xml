@@ -47,7 +47,7 @@
                         <![CDATA[
                         <p>Please enter in your <font color="red">Api App Key</font>  and <font color="red">Secret</font> in the fields below to finish the installation.</p>
                         <p>If you need help the Yotpo support team is here 24/7, don't hesitate to 
-                            <a href="https://www.yotpo.com/contact" target="_blank" title="yotpo-support">contact us.</a>
+                            <a href="https://yotposupport.zendesk.com/account/dropboxes/20158038#/dropbox/suggestions/ask" target="_blank" title="yotpo-support">contact us.</a>
                               </p>
 
                     <p>Click <a href="http://support.yotpo.com/entries/22635391-advanced-magento-features" target="_blank" 
@@ -63,7 +63,7 @@
                             <frontend_type>text</frontend_type>
                             <sort_order>1</sort_order>
                             <comment><![CDATA[Get your appkey at your yotpo account setting page. Click
-                                <a href="https://www.yotpo.com/register" target="_blank" title="yotpo-sign-up">here</a>
+                                <a href="https://my.yotpo.com/register?utm_source=customers_magento_admin&utm_medium=link&utm_campaign=magento_admin_signin_link" target="_blank" title="yotpo-sign-up">here</a>
                                 to sign in to yotpo]]>
                             </comment>
                             <show_in_default>0</show_in_default>
@@ -75,7 +75,7 @@
                             <frontend_type>text</frontend_type>
                             <sort_order>2</sort_order>
                             <comment><![CDATA[Get your secret at your yotpo account setting page. Click
-                                <a href="https://www.yotpo.com/register" target="_blank" title="yotpo-sign-up">here</a>
+                                <a href="http://support.yotpo.com/entries/22635391-advanced-magento-features?utm_source=customers_magento_admin&utm_medium=link&utm_campaign=magento_admin_advanced_magento_features" target="_blank" title="yotpo-sign-up">here</a>
                                 to sign in to yotpo]]>
                             </comment>
                             <show_in_default>0</show_in_default>
@@ -91,7 +91,7 @@
                             <comment>
                               <![CDATA[
                               By choosing not to use the deafult position, you'll need to follow the instructions in the 
-                              <br/><a href="http://support.yotpo.com/entries/22635391-advanced-magento-features" target="_blank" title="advanced-cusomization-guide">advanced customizations guide</a>]]>
+                              <br/><a href="http://support.yotpo.com/entries/22635391-advanced-magento-features?utm_source=customers_magento_admin&utm_medium=link&utm_campaign=magento_admin_advanced_magento_features" target="_blank" title="advanced-cusomization-guide">advanced customizations guide</a>]]>
                             </comment>
                             <show_in_default>0</show_in_default>
                             <show_in_website>0</show_in_website>
@@ -109,7 +109,7 @@
                             <show_in_store>1</show_in_store>
                             <comment>
                               <![CDATA[
-                              By pressing this button, we'll send Mail After Purchase emails for your past purchases. This may take a few minutes. <a href="http://support.yotpo.com/entries/21684298-Mail-After-Purchase-Magento-Installation-Guide" target="_blank" title="map-guide">Click here</a>
+                              By pressing this button, we'll send Mail After Purchase emails for your past purchases. This may take a few minutes. <a href="http://support.yotpo.com/entries/21684298-Mail-After-Purchase-Magento-Installation-Guide?utm_source=customers_magento_admin&utm_medium=link&utm_campaign=magento_admin_MAP_installation" target="_blank" title="map-guide">Click here</a>
                               for an explanation of the Mail After Purchase feature.
                               ]]>
                             </comment>
@@ -138,44 +138,28 @@
               <show_in_store>1</show_in_store>
               <comment>
                         <![CDATA[
-                        Show off your star ratings in Google with rich snippets.
-                        Learn more <a href="https://support.google.com/webmasters/answer/99170?hl=en">here</a>.
-                              <br/>
-                              <font color="red">
-                              *In order to activate rich snippets you will need to also tick the rich snippets tick box in your <a href="https://www.yotpo.com/customize/seo?utm_source=customers_magento_admin&utm_medium=link&utm_campaign=magento_rich_snippets" target="_blank">Yotpo admin</a></font>.<br/>]]>
+                        Show off your star ratings in Google search results with Rich Snippets. Adding Rich Snippets is proven to increase CTR on your organic search results by 17%!
+                        Click <a href="https://my.yotpo.com/features/rich-snippets">here</a> to find out how to install.<br/>]]>
               </comment>
 
-            <fields>
-              <rich_snippets_disabled>
-                <label>Disable Rich Snippets</label>
-                <frontend_type>select</frontend_type>
-                  <source_model>adminhtml/system_config_source_yesno</source_model>
-                  <enabled>0</enabled>
-                  <sort_order>5</sort_order>
-                  <show_in_default>0</show_in_default>
-                  <show_in_website>0</show_in_website>
-                  <show_in_store>1</show_in_store>
-              </rich_snippets_disabled>
-            </fields>
-
-            </yotpo_rich_snippets_group>
-            <yotpo_export_reviews_group translate="label">
-              <label>Export Magento Built-In Reviews</label>
-              <frontend_type>text</frontend_type>
-              <sort_order>4</sort_order>
-              <show_in_default>0</show_in_default>
-              <show_in_website>0</show_in_website>
-              <show_in_store>1</show_in_store>
-              <comment>
-                <![CDATA[
-                  <p>Export Magento Built-In Reviews</p>
-                  <p>This feature allows you to export reviews from Magento to Yotpo.</p>
-                  <p>For instructions on how to use this feature, click 
-                          <a href="http://support.yotpo.com/entries/22827652-exporting-reviews-for-magento" target="_blank" title="yotpo">here</a>
-                  </p><br/>
-                ]]>
-              </comment>
-            </yotpo_export_reviews_group>
+              </yotpo_rich_snippets_group>
+              <yotpo_export_reviews_group translate="label">
+                <label>Export Magento Built-In Reviews</label>
+                <frontend_type>text</frontend_type>
+                <sort_order>4</sort_order>
+                <show_in_default>0</show_in_default>
+                <show_in_website>0</show_in_website>
+                <show_in_store>1</show_in_store>
+                <comment>
+                  <![CDATA[
+                    <p>Export Magento Built-In Reviews</p>
+                    <p>This feature allows you to export reviews from Magento to Yotpo.</p>
+                    <p>For instructions on how to use this feature, click 
+                            <a href="http://support.yotpo.com/entries/22827652-exporting-reviews-for-magento?utm_source=customers_magento_admin&utm_medium=link&utm_campaign=magento_admin_exporting_reviews" target="_blank" title="yotpo">here</a>
+                    </p><br/>
+                  ]]>
+                </comment>
+              </yotpo_export_reviews_group>
 
             </groups>
         </yotpo>
