@@ -45,12 +45,12 @@ class Yotpo_Yotpo_Helper_RichSnippets extends Mage_Core_Helper_Abstract
                 
                 return array( "average_score" => $averageScore, "reviews_count" => $reviewsCount);
             }
-            return array( $snippet->getAverageScore(), $snippet->getReviewsCount());
+            return array( "average_score" => $snippet->getAverageScore(), "reviews_count" => $snippet->getReviewsCount());
 
         } catch(Excpetion $e) {
             Mage::log($e);
         }
-        return "";
+        return array();
     }
 
     private function getAppKey()
