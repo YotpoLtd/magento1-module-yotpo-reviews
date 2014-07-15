@@ -22,10 +22,15 @@ $installer->run("
 $shouldShowNotification = false;
 
 foreach (Mage::app()->getStores() as $store) {
-    if (!Mage::getStoreConfig('yotpo/yotpo_general_group/yotpo_appkey', $store) || !Mage::getStoreConfig('yotpo/yotpo_general_group/yotpo_appkey', $store)) {
+    if (!Mage::getStoreConfig('yotpo/yotpo_general_group/yotpo_appkey', $store)) {
         $shouldShowNotification = true;
         break;
     }
+}
+
+#handle single store magento site
+if (!Mage::getStoreConfig('yotpo/yotpo_general_group/yotpo_appkey', Mage::app()->getStore())) {
+  $shouldShowNotification = true;
 }
 
 if ($shouldShowNotification) {
