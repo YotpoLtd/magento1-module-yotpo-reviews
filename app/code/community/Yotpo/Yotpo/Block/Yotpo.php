@@ -38,11 +38,9 @@ class Yotpo_Yotpo_Block_Yotpo extends Mage_Core_Block_Template
     	return $productId;
     }
 
-
     public function getAppKey()
     {
-
-   	 	return trim(Mage::getStoreConfig('yotpo/yotpo_general_group/yotpo_appkey',Mage::app()->getStore()));
+        return trim(Mage::getStoreConfig('yotpo/yotpo_general_group/yotpo_appkey',Mage::app()->getStore()));
     }
 
     public function getProductName()
@@ -76,57 +74,6 @@ class Yotpo_Yotpo_Block_Yotpo extends Mage_Core_Block_Template
     	$_product = $this->getProduct();
     	$productDescription = Mage::helper('core')->htmlEscape(strip_tags($_product->getShortDescription()));
     	return $productDescription;
-    }
-
-    public function isRichSnippetEnabled() {
-        return !Mage::getStoreConfig('yotpo/yotpo_rich_snippets_group/rich_snippets_disabled',Mage::app()->getStore());
-    }
-
-    public function getRichSnippet()
-    {
-
-        if ($this->isRichSnippetEnabled()) {
-
-            try {
-
-                $productId = $this->getProductId();
-                $snippet = Mage::getModel('yotpo/richsnippet')->getSnippetByProductIdAndStoreId($productId, Mage::app()->getStore()->getId());
-
-                if (($snippet == null) || (!$snippet->isValid())) {
-                    //no snippet for product or snippet isn't valid anymore. get valid snippet code from yotpo api
-
-                    $res = Mage::helper('yotpo/apiClient')->createApiGet("products/".($this->getAppKey())."/richsnippet/".$productId, 2);
-
-                    if ($res["code"] != 200) {
-                        //product not found or feature disabled.
-                        return "";
-                    }
-
-                    $body = $res["body"];
-                    $htmlCode = $body->response->rich_snippet->html_code;
-                    if (empty($htmlCode)) {
-                        //feature is not enabled by user
-                        return "";
-                    }
-                    $ttl = $body->response->rich_snippet->ttl;
-
-                    if ($snippet == null) {
-                        $snippet = Mage::getModel('yotpo/richsnippet');
-                        $snippet->setProductId($productId);
-                        $snippet->setStoreId(Mage::app()->getStore()->getid());
-                    }
-
-                    $snippet->setHtmlCode($htmlCode);
-                    $snippet->setExpirationTime(date('Y-m-d H:i:s', time() + $ttl));
-                    $snippet->save();
-                }
-                return $snippet->getHtmlCode();
-
-            } catch(Excpetion $e) {
-                Mage::log($e);
-            }
-        }
-        return "";
     }
 
     public function getProductUrl()
