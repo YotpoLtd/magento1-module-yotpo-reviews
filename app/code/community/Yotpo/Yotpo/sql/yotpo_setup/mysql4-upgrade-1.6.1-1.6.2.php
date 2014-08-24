@@ -11,7 +11,7 @@ $installer->run("
       `rich_snippet_id` int(11) NOT NULL auto_increment,
       `product_id` int(11) NOT NULL,
       `store_id` int(11) NOT NULL,
-      `average_score` int(11) NOT NULL,
+      `average_score` float(11) NOT NULL,
       `reviews_count` int(11) NOT NULL,
       `expiration_time` timestamp NOT NULL default CURRENT_TIMESTAMP,
       PRIMARY KEY  (`rich_snippet_id`)
