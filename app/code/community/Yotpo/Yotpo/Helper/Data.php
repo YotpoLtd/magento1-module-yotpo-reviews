@@ -36,6 +36,15 @@ class Yotpo_Yotpo_Helper_Data extends Mage_Core_Helper_Abstract
         }
     }
 
+    public function showQuestions($thisObj, $product = null, $print=true)
+    {
+        $res = $this->renderYotpoProductBlock($thisObj, 'yotpo-questions', $product, $print);
+        if ($print == false)
+        { 
+            return $res; 
+        }
+    }
+
     private function renderYotpoProductBlock($thisObj, $blockName, $product = null, $print=true)
     {
         $block = $thisObj->getLayout()->getBlock('content')->getChild('yotpo');

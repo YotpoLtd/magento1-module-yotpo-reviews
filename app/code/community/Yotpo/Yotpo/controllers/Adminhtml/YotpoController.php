@@ -78,6 +78,9 @@ class Yotpo_Yotpo_Adminhtml_YotpoController extends Mage_Adminhtml_Controller_Ac
                     {
 
                         $order_data = array();
+                        if (!$order->getCustomerIsGuest()) {
+                            $order_data["user_reference"] = $order->getCustomerId();
+                        }
                         $order_data['order_id'] = $order->getIncrementId();
                         $order_data["email"] = $order->getCustomerEmail();
                         $order_data["customer_name"] = $order->getCustomerName();
