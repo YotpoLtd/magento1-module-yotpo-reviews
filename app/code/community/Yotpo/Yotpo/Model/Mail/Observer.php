@@ -27,15 +27,18 @@ class Yotpo_Yotpo_Model_Mail_Observer
 				$orderStatuses = array_map('strtolower', explode(' ', $orderStatuses));
 			}
 
-            if (!Mage::helper('yotpo/apiClient')->isEnabled($store_id))
-            {
-                return $this;
-            }
+			if (!Mage::helper('yotpo/apiClient')->isEnabled($store_id))
+			{
+				return $this;
+			}
 
 			if (!in_array($order->getStatus(), $orderStatuses)) {
 				return $this;
 			}
 			$data = array();
+			if (!$order->getCustomerIsGuest()) {
+				$data["user_reference"] = $order->getCustomerId();
+			}
 
 			$data["email"] = $order->getCustomerEmail();
 			$data["customer_name"] = $order->getCustomerName();

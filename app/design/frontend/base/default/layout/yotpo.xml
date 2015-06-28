@@ -10,6 +10,7 @@
 
         <reference name="product.info">
             <block type="yotpo/yotpo" name="yotpo.reviews" as="yotpo-reviews" template="yotpo/reviews.phtml"/>
+            <block type="yotpo/yotpo" name="yotpo.questions" as="yotpo-questions" template="yotpo/questions.phtml"/>
         </reference>
     </catalog_product_view>
 
@@ -32,6 +33,7 @@
                 <block type="yotpo/yotpo" name="yotpo.bottomline" as="yotpo-bottomline" template="yotpo/bottomline.phtml"/>
                 <block type="yotpo/yotpo" name="yotpo.qabottomline" as="yotpo-qa-bottomline" template="yotpo/qa_bottomline.phtml"/>
                 <block type="yotpo/yotpo" name="yotpo.reviews" as="yotpo-reviews" template="yotpo/reviews.phtml"/>
+                <block type="yotpo/yotpo" name="yotpo.questions" as="yotpo-questions" template="yotpo/questions.phtml"/>
             </block>
         </reference>
     </default>
