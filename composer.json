@@ -1,0 +1,9 @@
+{
+    "name": "yotpo/yotpo-magento",
+    "type": "magento-module",
+    "description": "Yotpo integration for Magento",
+    "homepage": "http://lp.yotpo.com/magento-extension.html",
+    "require": {
+        "magento-hackathon/magento-composer-installer": "*"
+    }
+}
