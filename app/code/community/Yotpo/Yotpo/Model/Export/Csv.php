@@ -15,11 +15,12 @@ class Yotpo_Yotpo_Model_Export_Csv extends Mage_Core_Model_Abstract
             $fileName = 'review_export_'.date("Ymd_His").'.csv';
             $fp = fopen(Mage::getBaseDir('export').'/'.$fileName, 'w');                
             $this->writeHeadRow($fp);
+            $storeId = Mage::app()->getStore()->getid();
 
             # Load all reviews with thier votes
             $allReviews = Mage::getModel('review/review')
                             ->getResourceCollection()
-                            ->addStoreFilter(Mage::app()->getStore()->getId()) 
+                            ->addStoreFilter($storeId)
                             ->addRateVotes();
 
             foreach ($allReviews as $fullReview) 
@@ -29,7 +30,7 @@ class Yotpo_Yotpo_Model_Export_Csv extends Mage_Core_Model_Abstract
                 {
                     if ($fullReview->getId() == $reviewId) 
                     {
-                        $this->writeReview($fullReview, $fp);
+                        $this->writeReview($storeId, $fullReview, $fp);
                         break;
                     }
                 }
@@ -57,10 +58,10 @@ class Yotpo_Yotpo_Model_Export_Csv extends Mage_Core_Model_Abstract
 	 * Writes the row(s) for the given review in the csv file.
 	 * A row is added to the csv file for each reviewed item.
 	 */
-    protected function writeReview($review, $fp)
+    protected function writeReview($store_id, $review, $fp)
     {
         $productId = $review->getData("entity_pk_value");
-        $record = array_merge($this->getReviewItemValues($review), $this->getProductItemValues($productId));
+        $record = array_merge($this->getReviewItemValues($review), $this->getProductItemValues($storeId, $productId));
         fputcsv($fp, $record, self::DELIMITER, self::ENCLOSURE);
     }
 
@@ -82,9 +83,10 @@ class Yotpo_Yotpo_Model_Export_Csv extends Mage_Core_Model_Abstract
         );
     }
 
-    protected function getProductItemValues($product_id)
+    protected function getProductItemValues($store_id, $product_id)
     {
         $obj = Mage::getModel('catalog/product');
+        $obj->setStoreId($store_id);
         $product = $obj->load($product_id);
 
         $Image = "";
