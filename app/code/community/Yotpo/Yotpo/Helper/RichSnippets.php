@@ -47,7 +47,7 @@ class Yotpo_Yotpo_Helper_RichSnippets extends Mage_Core_Helper_Abstract
             }
             return array( "average_score" => $snippet->getAverageScore(), "reviews_count" => $snippet->getReviewsCount());
 
-        } catch(Excpetion $e) {
+        } catch(Exception $e) {
             Mage::log($e);
         }
         return array();
