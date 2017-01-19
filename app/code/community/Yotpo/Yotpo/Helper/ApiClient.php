@@ -67,14 +67,8 @@ class Yotpo_Yotpo_Helper_ApiClient extends Mage_Core_Helper_Abstract
 		
 		foreach ($products as $product) {
 			
-			//use configurable product instead of simple if still needed
+			//load product entity
             $full_product = Mage::getModel('catalog/product')->load($product->getProductId());
-
-            $configurable_product_model = Mage::getModel('catalog/product_type_configurable');
-            $parentIds= $configurable_product_model->getParentIdsByChild($full_product->getId());
-            if (count($parentIds) > 0) {
-            	$full_product = Mage::getModel('catalog/product')->load($parentIds[0]);
-            }
 
 			$product_data = array();
 
