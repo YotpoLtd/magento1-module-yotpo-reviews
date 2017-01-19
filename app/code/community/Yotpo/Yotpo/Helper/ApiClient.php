@@ -78,7 +78,7 @@ class Yotpo_Yotpo_Helper_ApiClient extends Mage_Core_Helper_Abstract
 			try 
 			{
 				$product_data['url'] = $full_product->getUrlInStore(array('_store' => $order->getStoreId()));
-				$product_data['image'] = $full_product->getImageUrl();	
+				$product_data['image'] = Mage::helper('catalog/product')->getImageUrl($full_product);
 			} catch(Exception $e) {}
 			
 			$product_data['description'] = Mage::helper('core')->htmlEscape(strip_tags($full_product->getDescription()));
