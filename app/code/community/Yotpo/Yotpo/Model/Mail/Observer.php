@@ -44,7 +44,7 @@ class Yotpo_Yotpo_Model_Mail_Observer
 				$customer = $order->getBillingAddress()->getName();
 			}
 			$data["email"] = $order->getCustomerEmail();
-			$data["customer_name"] = $customer; //$order->getCustomerName();
+			$data["customer_name"] = $customer; 
 			$data["order_id"] = $order->getIncrementId();
 			$data["order_date"] = $order->getCreatedAtDate()->toString('yyyy-MM-dd HH:mm:ss');
 			$data['platform'] = 'magento';
