@@ -39,12 +39,12 @@ class Yotpo_Yotpo_Model_Mail_Observer
 			if (!$order->getCustomerIsGuest()) {
 				$data["user_reference"] = $order->getCustomerId();
 			}
-			$customer = $order->getCustomerName();
-			if($order->getCustomerIsGuest()){ // If checkout is guest checkout, than load billing name instead.
-				$customer = $order->getBillingAddress()->getName();
+			$customer_name = $order->getCustomerName();
+			if($order->getCustomerIsGuest()){
+				$customer_name = $order->getBillingAddress()->getName();
 			}
 			$data["email"] = $order->getCustomerEmail();
-			$data["customer_name"] = $customer; 
+			$data["customer_name"] = $customer_name; 
 			$data["order_id"] = $order->getIncrementId();
 			$data["order_date"] = $order->getCreatedAtDate()->toString('yyyy-MM-dd HH:mm:ss');
 			$data['platform'] = 'magento';
