@@ -2,9 +2,9 @@
 
 class Yotpo_Yotpo_Helper_RichSnippets extends Mage_Core_Helper_Abstract
 {
-    private $_config;
+    protected $_config;
 
-    public function __construct ()
+    public function __construct()
     {
         $this->_config = Mage::getStoreConfig('yotpo');
     }
@@ -47,13 +47,13 @@ class Yotpo_Yotpo_Helper_RichSnippets extends Mage_Core_Helper_Abstract
             }
             return array( "average_score" => $snippet->getAverageScore(), "reviews_count" => $snippet->getReviewsCount());
 
-        } catch(Exception $e) {
+        } catch(Excpetion $e) {
             Mage::log($e);
         }
         return array();
     }
 
-    private function getAppKey()
+    protected function getAppKey()
     {
         return trim(Mage::getStoreConfig('yotpo/yotpo_general_group/yotpo_appkey',Mage::app()->getStore()));
     }
