@@ -53,7 +53,7 @@ class Yotpo_Yotpo_Block_Yotpo extends Mage_Core_Block_Template
 
     public function getProductImageUrl()
     {
-        $image_url = Mage::getModel('catalog/product_media_config')->getMediaUrl($this->getProduct()->getSmallImage());
+        $image_url = Mage::getModel('catalog/product_media_config')->getMediaUrl($this->getProduct()->getImage());
         return $image_url;
     }
 
