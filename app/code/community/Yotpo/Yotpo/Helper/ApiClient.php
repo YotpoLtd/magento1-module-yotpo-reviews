@@ -67,14 +67,8 @@ class Yotpo_Yotpo_Helper_ApiClient extends Mage_Core_Helper_Abstract
 		
 		foreach ($products as $product) {
 			
-			//use configurable product instead of simple if still needed
+			//load product entity
             $full_product = Mage::getModel('catalog/product')->load($product->getProductId());
-
-            $configurable_product_model = Mage::getModel('catalog/product_type_configurable');
-            $parentIds= $configurable_product_model->getParentIdsByChild($full_product->getId());
-            if (count($parentIds) > 0) {
-            	$full_product = Mage::getModel('catalog/product')->load($parentIds[0]);
-            }
 
 			$product_data = array();
 
@@ -84,7 +78,7 @@ class Yotpo_Yotpo_Helper_ApiClient extends Mage_Core_Helper_Abstract
 			try 
 			{
 				$product_data['url'] = $full_product->getUrlInStore(array('_store' => $order->getStoreId()));
-				$product_data['image'] = $full_product->getImageUrl();	
+				$product_data['image'] = Mage::helper('catalog/product')->getImageUrl($full_product);
 			} catch(Exception $e) {}
 			
 			$product_data['description'] = Mage::helper('core')->htmlEscape(strip_tags($full_product->getDescription()));

@@ -22,13 +22,7 @@ class Yotpo_Yotpo_Block_Yotpo extends Mage_Core_Block_Template
             $this->setData('product', Mage::registry('product'));
         }
 
-        $product = $this->getData('product');
-        $configurable_product_model = Mage::getModel('catalog/product_type_configurable');
-        $parentIds= $configurable_product_model->getParentIdsByChild($product->getId());
-            if (count($parentIds) > 0) {
-                $product = Mage::getModel('catalog/product')->load($parentIds[0]);
-            }
-        return $product;
+        return $this->getData('product');
     }
 
     public function getProductId()
