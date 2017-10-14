@@ -58,7 +58,7 @@ class Yotpo_Yotpo_Model_Export_Csv extends Mage_Core_Model_Abstract
 	 * Writes the row(s) for the given review in the csv file.
 	 * A row is added to the csv file for each reviewed item.
 	 */
-    protected function writeReview($store_id, $review, $fp)
+    protected function writeReview($storeId, $review, $fp)
     {
         $productId = $review->getData("entity_pk_value");
         $record = array_merge($this->getReviewItemValues($review), $this->getProductItemValues($storeId, $productId));
