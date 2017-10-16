@@ -1,11 +1,9 @@
 <?php
-
 class Yotpo_Yotpo_Helper_Data extends Mage_Core_Helper_Abstract
 {
+    protected $_config;
 
-    private $_config;
-
-    public function __construct ()
+    public function __construct()
     {
         $this->_config = Mage::getStoreConfig('yotpo');
     }
@@ -13,7 +11,8 @@ class Yotpo_Yotpo_Helper_Data extends Mage_Core_Helper_Abstract
     public function showWidget($thisObj, $product = null, $print=true)
     {
         $res = $this->renderYotpoProductBlock($thisObj, 'yotpo-reviews', $product, $print);
-        if ($print == false) {
+        if($print == false)
+        {
             return $res;
         }
     }
@@ -22,7 +21,8 @@ class Yotpo_Yotpo_Helper_Data extends Mage_Core_Helper_Abstract
     {
 
         $res = $this->renderYotpoProductBlock($thisObj, 'yotpo-bottomline', $product);
-        if ($print == false){
+        if($print == false)
+        {
             return $res;
         }
     }
@@ -31,7 +31,8 @@ class Yotpo_Yotpo_Helper_Data extends Mage_Core_Helper_Abstract
     {
 
         $res = $this->renderYotpoProductBlock($thisObj, 'yotpo-qa-bottomline', $product);
-        if ($print == false){
+        if($print == false)
+        {
             return $res;
         }
     }
@@ -39,36 +40,38 @@ class Yotpo_Yotpo_Helper_Data extends Mage_Core_Helper_Abstract
     public function showQuestions($thisObj, $product = null, $print=true)
     {
         $res = $this->renderYotpoProductBlock($thisObj, 'yotpo-questions', $product, $print);
-        if ($print == false)
+        if($print == false)
         { 
             return $res; 
         }
     }
-
-    private function renderYotpoProductBlock($thisObj, $blockName, $product = null, $print=true)
+    
+    protected function renderYotpoProductBlock($thisObj, $blockName, $product = null, $print=true)
     {
         $block = $thisObj->getLayout()->getBlock('content')->getChild('yotpo');
-        if ($block == null) {
+        if($block == null)
+        {
             Mage::log("can't find yotpo block");
             return;
         }
 
         $block = $block->getChild($blockName);
-        if ($block == null) {
+        if($block == null)
+        {
             Mage::log("can't find yotpo child named: ".$blockName);
             return;
         }
 
-        if ($product != null)
+        if($product != null)
         {
             $block->setAttribute('product', $product);
         }
-        if ($block != null)
+        if($block != null)
         {
-
-            if ($print == true) {
-                echo $block->toHtml();
-            } else {
+            if($print == true)
+            {
+                $block->toHtml();
+            }else{
                 return $block->toHtml();
             }
 
