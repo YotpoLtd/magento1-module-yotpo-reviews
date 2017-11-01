@@ -21,7 +21,6 @@ class Yotpo_Yotpo_Adminhtml_YotpoController extends Mage_Adminhtml_Controller_Ac
 
             foreach (Mage::app()->getStores() as $store) {
                 if ($store->getCode() == $store_code) {
-                    global $current_store;
                     $current_store = $store;
                     break;
                 }
@@ -110,4 +109,9 @@ class Yotpo_Yotpo_Adminhtml_YotpoController extends Mage_Adminhtml_Controller_Ac
 
         Mage::app()->getResponse()->setBody(1);
     } 
+    
+    protected function _isAllowed() 
+    {
+        return Mage::getSingleton('admin/session')->isAllowed('catalog/product');
+    }
 }
