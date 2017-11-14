@@ -43,4 +43,3 @@ if ($shouldShowNotification) {
 }
 
 $installer->endSetup();
-?>

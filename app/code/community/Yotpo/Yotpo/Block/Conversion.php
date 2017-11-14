@@ -37,6 +37,3 @@ class Yotpo_Yotpo_Block_Conversion extends Mage_Checkout_Block_Onepage_Success
     }
 }
 
-
-
-?>

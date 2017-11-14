@@ -49,6 +49,3 @@ class Yotpo_Yotpo_Block_Adminhtml_System_Config_Form_Button extends Mage_Adminht
         return $button->toHtml();
     }
 }
-
-
-?>
