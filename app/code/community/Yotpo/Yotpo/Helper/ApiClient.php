@@ -79,12 +79,26 @@ class Yotpo_Yotpo_Helper_ApiClient extends Mage_Core_Helper_Abstract
 			$product_data = array();
 
 			$product_data['name'] = $full_product->getName();
+			$productData['sku'] = $full_product->getSku();
 			$product_data['url'] = '';
 			$product_data['image'] = '';
 			try 
 			{
 				$product_data['url'] = $full_product->getUrlInStore(array('_store' => $order->getStoreId()));
 				$product_data['image'] = $full_product->getImageUrl();	
+				if($full_product->getUpc()){
+                $productData['upc'] = $full_product->getUpc();
+                }
+                if($full_product->getIsbn()){
+                $productData['isbn'] = $full_product->getIsbn();
+                }
+                if($full_product->getBrand()){
+                $productData['brand'] = $full_product->getBrand();
+                }
+                if($full_product->getMpn()){
+                $productData['mpn'] = $full_product->getMpn();
+                }
+
 			} catch(Exception $e) {
                             Mage::log('error: ' .$e);
                         }
