@@ -51,6 +51,7 @@ To insert the bottom line on product pages, add the following code in the file [
 The full extension manuals can be found here:
 
 https://support.yotpo.com/en/article/magento-installing-yotpo
+
 https://support.yotpo.com/en/article/magento-configuring-yotpo-after-installation
 
 
