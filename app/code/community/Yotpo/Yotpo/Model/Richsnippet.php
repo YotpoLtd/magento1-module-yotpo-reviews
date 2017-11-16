@@ -19,7 +19,8 @@ class Yotpo_Yotpo_Model_Richsnippet extends Mage_Core_Model_Abstract
         if ($col->getSize() == 0) {
             return null;
         }
-        $snippet = $col->getItemByColumnValue('product_id', $product_id);
+        $col->addFieldToFilter('product_id', $product_id);
+        $snippet = $col->getFirstItem();
         return $snippet;
     }
 }
