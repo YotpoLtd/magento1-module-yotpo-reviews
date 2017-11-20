@@ -63,55 +63,64 @@ class Yotpo_Yotpo_Helper_ApiClient extends Mage_Core_Helper_Abstract
 	{
         Mage::app()->setCurrentStore($order->getStoreId());
         $products = $order->getAllVisibleItems(); //filter out simple products
-		$products_arr = array();
-		
-		foreach ($products as $product) {
-			
-			//use configurable product instead of simple if still needed
+        $products_arr = array();
+
+        foreach ($products as $product) {
+
+            //use configurable product instead of simple if still needed
             $full_product = Mage::getModel('catalog/product')->load($product->getProductId());
 
             $configurable_product_model = Mage::getModel('catalog/product_type_configurable');
-            $parentIds= $configurable_product_model->getParentIdsByChild($full_product->getId());
+            $parentIds = $configurable_product_model->getParentIdsByChild($full_product->getId());
             if (count($parentIds) > 0) {
-            	$full_product = Mage::getModel('catalog/product')->load($parentIds[0]);
+                $full_product = Mage::getModel('catalog/product')->load($parentIds[0]);
             }
 
-			$product_data = array();
+            $specs_data = array();
+            $product_data = array();
 
-			$product_data['name'] = $full_product->getName();
-			$productData['sku'] = $full_product->getSku();
-			$product_data['url'] = '';
-			$product_data['image'] = '';
-			try 
-			{
-				$product_data['url'] = $full_product->getUrlInStore(array('_store' => $order->getStoreId()));
-				$product_data['image'] = $full_product->getImageUrl();	
-				if($full_product->getUpc()){
-                $productData['upc'] = $full_product->getUpc();
-                }
-                if($full_product->getIsbn()){
-                $productData['isbn'] = $full_product->getIsbn();
-                }
-                if($full_product->getBrand()){
-                $productData['brand'] = $full_product->getBrand();
-                }
-                if($full_product->getMpn()){
-                $productData['mpn'] = $full_product->getMpn();
+            $product_data['name'] = $full_product->getName();
+            $product_data['url'] = '';
+            $product_data['image'] = '';
+            try {
+                $product_data['url'] = $full_product->getUrlInStore(array('_store' => $order->getStoreId()));
+                $product_data['image'] = $full_product->getImageUrl();
+
+                if ($full_product->getUpc()) {
+                    $specs_data['upc'] = $full_product->getUpc();
                 }
 
-			} catch(Exception $e) {
-                            Mage::log('error: ' .$e);
-                        }
-			
-			$product_data['description'] = Mage::helper('core')->htmlEscape(strip_tags($full_product->getDescription()));
-			$product_data['price'] = $product->getPrice();
+                if ($full_product->getIsbn()) {
+                    $specs_data['isbn'] = $full_product->getIsbn();
+                }
 
-			$products_arr[$full_product->getId()] = $product_data;
-			
-		}
+                if ($full_product->getBrand()) {
+                    $specs_data['brand'] = $full_product->getBrand();
+                }
 
-		return $products_arr;
-	}
+                if ($full_product->getMpn()) {
+                    $specs_data['mpn'] = $full_product->getMpn();
+                }
+                
+                if ($full_product->getSku()) {
+                    $specs_data['sku'] = $full_product->getSku();
+                }
+
+                if (!empty($specs_data)) {
+                    $product_data['specs'] = $specs_data;
+                }
+            } catch (Exception $e) {
+                Mage::log('error: ' . $e);
+            }
+
+            $product_data['description'] = Mage::helper('core')->htmlEscape(strip_tags($full_product->getDescription()));
+            $product_data['price'] = $product->getPrice();
+
+            $products_arr[$full_product->getId()] = $product_data;
+        }
+
+        return $products_arr;
+    }
 
 	public function createApiPost($path, $data, $timeout=self::DEFAULT_TIMEOUT) {
 		try 
