@@ -19,6 +19,7 @@ class Yotpo_Yotpo_Model_Mail_Observer
 
 			$event = $observer->getEvent();
 			$order = $event->getOrder();
+                        $customerData = $order->getData();
 			$store_id = $order->getStoreId();
 			$orderStatuses = Mage::getStoreConfig('yotpo/yotpo_general_group/custom_order_status', $order->getStore());
 			if ($orderStatuses == null) {
@@ -39,7 +40,7 @@ class Yotpo_Yotpo_Model_Mail_Observer
 			if (!$order->getCustomerIsGuest()) {
 				$data["user_reference"] = $order->getCustomerId();
 			}
-			$customer_name = $order->getCustomerName();
+			$customer_name = $customerData['customer_firstname'].' '.$customerData['customer_lastname'];
 			if($order->getCustomerIsGuest()){
 				$customer_name = $order->getBillingAddress()->getName();
 			}
