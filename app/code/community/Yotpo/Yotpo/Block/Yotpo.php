@@ -11,7 +11,7 @@ class Yotpo_Yotpo_Block_Yotpo extends Mage_Core_Block_Template
     {
     	$this->setData('product', $product);
     	$_product = $this->getProduct();
-    	echo $_product->getName();
+    	$_product->getName();
     }
 
 
