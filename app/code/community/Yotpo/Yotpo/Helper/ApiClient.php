@@ -102,8 +102,8 @@ class Yotpo_Yotpo_Helper_ApiClient extends Mage_Core_Helper_Abstract
                     $specs_data['mpn'] = $full_product->getMpn();
                 }
                 
-                if ($full_product->getExternalSku()) {
-                    $specs_data['external_sku'] = $full_product->getExternalSku();
+                if ($full_product->getSku()) {
+                    $specs_data['external_sku'] = $full_product->getSku();
                 }
 
                 if (!empty($specs_data)) {
