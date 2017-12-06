@@ -45,7 +45,6 @@ class Yotpo_Yotpo_Adminhtml_YotpoController extends Mage_Adminhtml_Controller_Ac
 
 
             $today = time();
-            $toDate = date("Y-m-d", $today);
             $last = $today - (60*60*24*90); //90 days ago
             $fromDate = date("Y-m-d", $last);
             $offset = 0;
@@ -59,7 +58,7 @@ class Yotpo_Yotpo_Adminhtml_YotpoController extends Mage_Adminhtml_Controller_Ac
             $salesCollection = $salesModel->getCollection()
                     ->addFieldToFilter('status', $orderStatuses)
                     ->addFieldToFilter('store_id', $store_id)
-                    ->addAttributeToFilter('created_at', array('gt' =>$from))
+                    ->addAttributeToFilter('created_at', array('gt' =>$fromDate))
                     ->addAttributeToSort('created_at', 'DESC')
                     ->setPageSize(self::MAX_BULK_SIZE);
 
