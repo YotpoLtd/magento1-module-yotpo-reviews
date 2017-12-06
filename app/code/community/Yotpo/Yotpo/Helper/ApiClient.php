@@ -107,8 +107,18 @@ class Yotpo_Yotpo_Helper_ApiClient extends Mage_Core_Helper_Abstract
 			$http = new Varien_Http_Adapter_Curl();
 			$feed_url = self::YOTPO_SECURED_API_URL."/".$path;
 			$http->setConfig($config);
+            Mage::log("'".json_encode($data)."' json created successfully...!", null, 'yotpo.log', true);
 			$http->write(Zend_Http_Client::POST, $feed_url, '1.1', array('Content-Type: application/json'), json_encode($data));
 			$resData = $http->read();
+                        $ary = "Response Code —>".Zend_Http_Response::extractCode($resData);
+                        Mage::log($ary, null, 'yotpo.log', true);
+                        $bdy = json_decode(Zend_Http_Response::extractBody($resData));
+                        $code = get_object_vars($bdy)['code'];
+                        $message = get_object_vars($bdy)['message'];
+                        $uuid = get_object_vars($bdy)['uuid'];
+                        Mage::log('Response Code => '.$code, null, 'yotpo.log', true);
+                        Mage::log('Response Message => '.$message, null, 'yotpo.log', true);
+                        Mage::log('Response UUID => '.$uuid, null, 'yotpo.log', true);
 			return array("code" => Zend_Http_Response::extractCode($resData), "body" => json_decode(Zend_Http_Response::extractBody($resData)));
 
 
