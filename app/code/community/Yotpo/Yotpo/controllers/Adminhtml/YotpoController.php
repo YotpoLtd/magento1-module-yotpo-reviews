@@ -16,10 +16,10 @@ class Yotpo_Yotpo_Adminhtml_YotpoController extends Mage_Adminhtml_Controller_Ac
             $result = null;
 
             $store_code = Mage::app()->getRequest()->getParam('store');
-
             $current_store = null;
-
+            $stores =Mage::app()->getStores();
             foreach (Mage::app()->getStores() as $store) {
+                $store->getCode();            
                 if ($store->getCode() == $store_code) {
                     $current_store = $store;
                     break;
@@ -46,7 +46,7 @@ class Yotpo_Yotpo_Adminhtml_YotpoController extends Mage_Adminhtml_Controller_Ac
 
             $today = time();
             $last = $today - (60*60*24*90); //90 days ago
-            $from = date("Y-m-d", $last);
+            $fromDate = date("Y-m-d", $last);
             $offset = 0;
             $salesModel=Mage::getModel("sales/order");
             $orderStatuses = Mage::getStoreConfig('yotpo/yotpo_general_group/custom_order_status', $current_store);
@@ -58,7 +58,7 @@ class Yotpo_Yotpo_Adminhtml_YotpoController extends Mage_Adminhtml_Controller_Ac
             $salesCollection = $salesModel->getCollection()
                     ->addFieldToFilter('status', $orderStatuses)
                     ->addFieldToFilter('store_id', $store_id)
-                    ->addAttributeToFilter('created_at', array('gteq' =>$from))
+                    ->addAttributeToFilter('created_at', array('gt' =>$fromDate))
                     ->addAttributeToSort('created_at', 'DESC')
                     ->setPageSize(self::MAX_BULK_SIZE);
 
@@ -94,7 +94,6 @@ class Yotpo_Yotpo_Adminhtml_YotpoController extends Mage_Adminhtml_Controller_Ac
                     {
                         Mage::helper('yotpo/apiClient')->massCreatePurchases($orders, $token, $store_id);
                     }
-                    
                 } catch (Exception $e) {
                     Mage::log('Failed to export past orders. Error: '.$e);    
                 }
