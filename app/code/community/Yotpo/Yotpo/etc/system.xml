@@ -97,6 +97,16 @@
                             <show_in_website>0</show_in_website>
                             <show_in_store>1</show_in_store>
                         </disable_default_widget_position>
+						<enable_bottomline_category_page>
+                            <label>Enable Star Ratings On Category Pages</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <enabled>1</enabled>
+                            <sort_order>5</sort_order>
+                            <show_in_default>0</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enable_bottomline_category_page>
                         <orders_export translate="label">
                             <label>Send Mail After Purchase emails for orders created in the last 90 days</label>
                             <frontend_type>button</frontend_type>
