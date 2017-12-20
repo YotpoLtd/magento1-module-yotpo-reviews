@@ -24,6 +24,9 @@
 
     <default>
         <reference name="head">
+			<action method="AddCSS">
+                <stylesheet>css/yotpo-bottomline.css</stylesheet>
+            </action>
             <block type="yotpo/yotpo" as="yotpo-js" template="yotpo/app_key_js.phtml" name="yotpo.js">
 			</block>			
         </reference>
