@@ -25,7 +25,7 @@
     <default>
         <reference name="head">
             <block type="yotpo/yotpo" as="yotpo-js" template="yotpo/app_key_js.phtml" name="yotpo.js">
-            </block>
+			</block>			
         </reference>
 
         <reference name="content">
