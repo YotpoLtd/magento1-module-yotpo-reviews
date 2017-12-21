@@ -1,4 +1,5 @@
 .products-grid .item .standalone-bottomline{
 display: flex;
 justify-content: center;
+padding:10px 0;
 }
