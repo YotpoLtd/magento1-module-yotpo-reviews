@@ -5,6 +5,9 @@
         <Yotpo_Yotpo>
             <active>true</active>
             <codePool>community</codePool>
+			<depends>
+                <Mage_Catalog/>
+            </depends>
         </Yotpo_Yotpo>
     </modules>
 </config>
