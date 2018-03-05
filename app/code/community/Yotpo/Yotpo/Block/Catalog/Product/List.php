@@ -19,7 +19,11 @@ class Yotpo_Yotpo_Block_Catalog_Product_List extends Mage_Catalog_Block_Product_
 
         $enableBottomlineCategoryPage = Mage::getStoreConfig(self::CATEGORY_BOTTOMLINE);
         if ($enableBottomlineCategoryPage) {
-            return $this->helper('yotpo')->showBottomline($this, $product);
+			
+			return '<div class="yotpo bottomLine"
+						data-product-id="'.$product->getId().'"
+						data-url="'.$product->getUrl().'">
+					</div>';
         } else {
             return parent::getReviewsSummaryHtml($product, $templateType, $displayIfNoReviews);
         }
