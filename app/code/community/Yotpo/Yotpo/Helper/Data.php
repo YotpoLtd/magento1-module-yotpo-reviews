@@ -53,7 +53,14 @@ class Yotpo_Yotpo_Helper_Data extends Mage_Core_Helper_Abstract {
 
         if ($product != null) {
             $block->setAttribute('product', $product);
-        }        
+        }
+		if ($block != null) {
+            if ($print == true) {
+               return $block->toHtml();
+            } else {
+                return $block->toHtml();
+            }
+        }
     }
 
 }
