@@ -20,7 +20,8 @@ class Yotpo_Yotpo_Review_ExportController extends Mage_Adminhtml_Controller_Acti
         $baseDir = Mage::getBaseDir("export")."/";
         $file_content = file_get_contents($baseDir . $fileName);
         if ($file_content) {
-            $this->getResponse()->setHeader('Content-type', 'application/csv');
+            $this->getResponse()->setHeader('Content-type', 'text/csv');
+            $this->getResponse()->setHeader('Content-Disposition', 'attachment; filename="' . $fileName . '"');
             $this->getResponse()->setBody($file_content);
             return $this;
         }
