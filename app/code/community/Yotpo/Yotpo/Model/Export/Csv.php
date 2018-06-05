@@ -11,6 +11,7 @@ class Yotpo_Yotpo_Model_Export_Csv extends Mage_Core_Model_Abstract
     {
         try {
             $path = Mage::getBaseDir('export') . '/' ;
+            $io = new Varien_Io_File();
             $fileName = 'review_export_' . date("Ymd_His") . '.csv';
             $storeId = Mage::app()->getStore()->getid();
             $io->setAllowCreateFolders(true);

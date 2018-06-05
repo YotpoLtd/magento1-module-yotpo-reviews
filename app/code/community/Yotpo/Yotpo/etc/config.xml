@@ -3,52 +3,57 @@
 <config>
     <modules>
         <Yotpo_Yotpo>
-            <version>1.6.4</version>
+            <version>1.6.9</version>
         </Yotpo_Yotpo>
     </modules>
     
     <global>
-    	<blocks>
-    		<yotpo>
-	    		<class>Yotpo_Yotpo_Block</class>
-    		</yotpo>
-			<catalog>
+        <blocks>
+            <yotpo>
+                <class>Yotpo_Yotpo_Block</class>
+            </yotpo>
+            <catalog>
                 <rewrite>
-					<product_list>Yotpo_Yotpo_Block_Catalog_Product_List</product_list>
+                    <product_list>Yotpo_Yotpo_Block_Catalog_Product_List</product_list>
                 </rewrite>
             </catalog>
-    	</blocks>
-    	<models>
-    		<yotpo>
-    			<class>Yotpo_Yotpo_Model</class>
+            <catalog>
+                <rewrite>
+                    <product_view>Yotpo_Yotpo_Block_Catalog_Product_View</product_view>
+                </rewrite>
+            </catalog>
+        </blocks>
+        <models>
+            <yotpo>
+                <class>Yotpo_Yotpo_Model</class>
                 <resourceModel>yotpo_mysql4</resourceModel>
-    		</yotpo>
+            </yotpo>
 
             <yotpo_mysql4>
-            <class>Yotpo_Yotpo_Model_Mysql4</class>  
-            <entities>
-                <richsnippet>
-                    <table>yotpo_rich_snippets</table>
-                </richsnippet>
-            </entities>                
+                <class>Yotpo_Yotpo_Model_Mysql4</class>  
+                <entities>
+                    <richsnippet>
+                        <table>yotpo_rich_snippets</table>
+                    </richsnippet>
+                </entities>                
             </yotpo_mysql4>
-    	</models>
+        </models>
         <helpers>
             <yotpo>
                 <class>Yotpo_Yotpo_Helper</class>
             </yotpo>
         </helpers>
-    	<events>
-			<sales_order_save_after>
-			  <observers>
-			  	  <yotpo_yotpo_mail_observer>
-			  	  	  <type>singleton</type>
-			          <class>Yotpo_Yotpo_Model_Mail_Observer</class>
-			          <method>mail_after_purchase</method>
-			      </yotpo_yotpo_mail_observer>
-			  </observers>
-			</sales_order_save_after>
-      	</events>
+        <events>
+            <sales_order_save_after>
+                <observers>
+                    <yotpo_yotpo_mail_observer>
+                        <type>singleton</type>
+                        <class>Yotpo_Yotpo_Model_Mail_Observer</class>
+                        <method>mail_after_purchase</method>
+                    </yotpo_yotpo_mail_observer>
+                </observers>
+            </sales_order_save_after>
+        </events>
         <resources>
             <yotpo_setup>
                 <setup>
@@ -84,17 +89,17 @@
         </routers>    
     </admin>
 
-	<frontend>
-		<layout>
-			<updates>
-				<yotpo>
-					<file>yotpo.xml</file>
-				</yotpo>
-			</updates>
-		</layout>
-	</frontend>
+    <frontend>
+        <layout>
+            <updates>
+                <yotpo>
+                    <file>yotpo.xml</file>
+                </yotpo>
+            </updates>
+        </layout>
+    </frontend>
 	
-	<adminhtml>
+    <adminhtml>
         <events>
             <core_block_abstract_prepare_layout_before>
                 <observers>
