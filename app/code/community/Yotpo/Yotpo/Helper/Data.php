@@ -56,7 +56,7 @@ class Yotpo_Yotpo_Helper_Data extends Mage_Core_Helper_Abstract {
         }
 		if ($block != null) {
             if ($print == true) {
-               $block->toHtml();
+               echo $block->toHtml();
             } else {
                 return $block->toHtml();
             }
