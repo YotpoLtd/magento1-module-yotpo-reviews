@@ -47,7 +47,7 @@ class Yotpo_Yotpo_Model_Mail_Observer
 			$data["email"] = $order->getCustomerEmail();
 			$data["customer_name"] = $customer_name; 
 			$data["order_id"] = $order->getIncrementId();
-			$data["order_date"] = $order->getCreatedAtDate()->toString('yyyy-MM-dd HH:mm:ss');
+			$data["order_date"] = $this->getCreationDate($order)->toString('yyyy-MM-dd HH:mm:ss');
 			$data['platform'] = 'magento';
 			$data['currency_iso'] = $order->getOrderCurrency()->getCode();
 			$data['products'] = Mage::helper('yotpo/apiClient')->prepareProductsData($order);
@@ -66,5 +66,23 @@ class Yotpo_Yotpo_Model_Mail_Observer
 			Mage::log('Failed to send mail after purchase. Error: '.$e);
 		}
 	}
-	
+
+    /**
+     * @param Mage_Sales_Model_Order $order
+     * @return Zend_Date
+     */
+    private function getCreationDate($order)
+    {
+        $statusesWarrantingShipmentDate = ["shipped", "complete"];
+        if (in_array($order->getStatus(), $statusesWarrantingShipmentDate)) {
+            /** @var Mage_Sales_Model_Resource_Order_Shipment_Collection $shipments */
+            $shipments = $order->getShipmentsCollection();
+            /** @var Mage_Sales_Model_Order_Shipment $lastShipment */
+            $lastShipment = $shipments->getLastItem();
+            if ($lastShipment->getId()){
+                return $lastShipment->getCreatedAtDate();
+            }
+        }
+        return $order->getCreatedAtDate();
+    }
 }
