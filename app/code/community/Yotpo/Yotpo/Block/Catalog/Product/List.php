@@ -4,7 +4,11 @@ class Yotpo_Yotpo_Block_Catalog_Product_List extends Mage_Catalog_Block_Product_
 
 	const CATEGORY_BOTTOMLINE = 'yotpo/yotpo_general_group/enable_bottomline_category_page';
     protected function _getProductCollection() {
+        $limit = $_REQUEST['limit'];
+        $page =  $_REQUEST['p'];
         $_productCollection = parent::_getProductCollection();
+        $_productCollection->setCurPage($page)
+                           ->setPageSize($limit);
         $enableBottomlineCategoryPage = Mage::getStoreConfig(self::CATEGORY_BOTTOMLINE);
         if ($enableBottomlineCategoryPage) {
 
