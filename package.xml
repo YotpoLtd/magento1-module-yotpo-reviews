@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <package>
-    <name>yotpo+Yotpo_Review_Extension</name>
-    <version>1.7.1</version>
+    <name>Yotpo_Review_Extension</name>
+    <version>1.7.2</version>
     <stability>stable</stability>
     <license uri="http://opensource.org/licenses/osl-3.0.php">OSL 3.0</license>
-    <channel>19271e972a452fb535c43e094fd45dd1</channel>
+    <channel>community</channel>
     <extends/>
     <summary>This extension includes the files of the Yotpo Reviews extension The directories hierarchy is as positioned in a standard magento project library</summary>
     <description>This extension includes the files of the Yotpo Reviews extension The directories hierarchy is as positioned in a standard magento project library</description>
