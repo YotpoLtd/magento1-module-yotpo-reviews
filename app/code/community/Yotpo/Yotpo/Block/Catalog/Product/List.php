@@ -3,9 +3,11 @@
 class Yotpo_Yotpo_Block_Catalog_Product_List extends Mage_Catalog_Block_Product_List {
 
 	const CATEGORY_BOTTOMLINE = 'yotpo/yotpo_general_group/enable_bottomline_category_page';
+	const CATEGORY_DEFAULT_GRID = 'catalog/frontend/grid_per_page';
+    const CATEGORY_DEFAULT_LIST = 'catalog/frontend/list_per_page';
     protected function _getProductCollection() {
-        $limit = Mage::app()->getRequest()->getParam('limit');
         $page = Mage::app()->getRequest()->getParam('p');
+        $limit = $this->getLimit();
         $_productCollection = parent::_getProductCollection();
         $_productCollection->setCurPage($page)
                            ->setPageSize($limit);
@@ -31,6 +33,20 @@ class Yotpo_Yotpo_Block_Catalog_Product_List extends Mage_Catalog_Block_Product_
         } else {
             return parent::getReviewsSummaryHtml($product, $templateType, $displayIfNoReviews);
         }
+    }
+	
+	private function getLimit() {
+        $limit = Mage::app()->getRequest()->getParam('limit');
+        if (empty($limit)) {
+            $mode = Mage::app()->getLayout()->createBlock('catalog/product_list_toolbar')->getCurrentMode();
+            if ($mode != 'grid') {
+                $limit = Mage::getStoreConfig(self::CATEGORY_DEFAULT_LIST);
+            } else {
+                $limit = Mage::getStoreConfig(self::CATEGORY_DEFAULT_GRID);
+            }
+        }
+
+        return $limit;
     }
 
 }
