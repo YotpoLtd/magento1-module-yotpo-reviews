@@ -39,13 +39,13 @@ Insert Your account app key and secret
 To insert the widget manually on your product page add the following code in the file [magento-root-directory]/app/design/frontend/[your-theme]/default/template/catalog/product/view.phtml
 
 ```
-<?php $this->helper('yotpo')->showWidget($this, $_product); ?>
+<?php echo $this->helper('yotpo')->showWidget($this, $_product); ?>
 ```
 
 To insert the bottom line on product pages, add the following code in the file [magento-root-directory]/app/design/frontend/[your-theme]/default/template/catalog/product/list.phtml
 
 ```
-<?php $this->helper('yotpo')->showBottomline($this, $_product); ?>
+<?php echo $this->helper('yotpo')->showBottomline($this, $_product); ?>
 ```
 
 The full extension manuals can be found here:
