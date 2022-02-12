@@ -1,5 +1,6 @@
 Magento Yotpo Extension
 =============================
+**This project is not maintained anymore.**
 
 This library includes the files of the Yotpo Reviews extension
 The directories hierarchy is as positioned in a standard magento project library
