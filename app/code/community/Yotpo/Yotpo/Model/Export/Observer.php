@@ -4,7 +4,8 @@ class Yotpo_Yotpo_Model_Export_Observer
 {
 	public function addMassAction($observer) {
    		$block = $observer->getEvent()->getBlock();
-        if(get_class($block) =='Mage_Adminhtml_Block_Widget_Grid_Massaction'
+        if((get_class($block) =='Mage_Adminhtml_Block_Widget_Grid_Massaction'
+            || get_class($block) == 'Amasty_Oaction_Block_Adminhtml_Widget_Grid_Massaction')
             && strstr( $block->getRequest()->getControllerName(), 'review'))
         {
         	$block->addItem('exportreviews', array(
