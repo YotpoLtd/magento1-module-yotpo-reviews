@@ -39,32 +39,6 @@ class Yotpo_Yotpo_Model_Export_Csv extends Mage_Core_Model_Abstract
             Mage::log($e->getMessage());
         }
     }
-    
-    
-    public function exportData($reviewsToExport)
-    {
-        try {
-            $storeId = Mage::app()->getStore()->getid();
-            $allReviews = Mage::getModel('review/review')
-                    ->getResourceCollection()
-                    ->addStoreFilter($storeId)
-                    ->addRateVotes();
-            $data = array();
-            foreach ($allReviews as $fullReview) {
-                # check if we want to export the current review
-                foreach ($reviewsToExport as $reviewId) {
-                    if ($fullReview->getId() == $reviewId) {
-                       $data = $this->writeReview($storeId, $fullReview);
-                       
-                        break;
-                    }
-                }
-            }
-            return $data;
-        } catch (Exception $e) {
-            Mage::log($e->getMessage());
-        }
-    }
 
     /**
      * Writes the head row with the column names in the csv file.
